@@ -1,0 +1,155 @@
+<!-- start: BREADCRUMB -->
+<div class="breadcrumb-wrapper">
+   <h4 class="mainTitle no-margin" translate="sidebar.nav.promotions.MAIN"> Clone Card </h4>
+   <span class="mainDescription"></span>
+   <div ncy-breadcrumb class="pull-right"></div>
+</div>
+<!-- end: BREADCRUMB -->
+<div class="container-fluid container-fullw">
+   <div ng-controller="cloneCardCtrl">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="panel panel-white">
+               <div class="panel-body">
+                  <div class="row">
+                     <form name="Form" id="form" novalidate method="POST" ng-submit="cloneForm.submit(Form)">
+                        <div class="col-md-6">
+                           <fieldset>
+                              <legend>
+                                 Card Details
+                              </legend>
+                              <div class="col-md-12">
+                                 <div class="col-md-6">
+                                    <div class="row">
+                                       <div class="col-md-12">
+                                          <div class="form-group" >
+                                             <div flow-init flow-name="obj.flow" 
+                                                flow-files-added="processFiles($files)">
+                                                <div class="user-image">
+                                                   <div class="thumbnail">
+                                                      <img id="img" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=add+image&w=225&h=225" style="max-width: 100%; width:100%" alt="" ng-if="!obj.flow.files.length && noImage" width="300">
+                                                      <img  id="img" ng-src="{{app.api}}/ajaxCall-photo.htm?flag=manuContentImage&compress=0&id={{promotionId}}" 
+                                                      style="max-width: 100%; width:100%" alt="" ng-if="!obj.flow.files.length && !noImage" width="300">
+                                                      <img  id="img" flow-img="obj.flow.files[0]" style="max-width: 100%; width:100%" ng-if="obj.flow.files.length" width="300">
+                                                   </div>
+                                                   <div class="user-image-buttons" ng-if="obj.flow.files.length">
+                                                      <span class="btn btn-primary btn-file">
+                                                      <i class="fa fa-pencil"></i>
+                                                      <input type="file" flow-btn ng-model="cloneForm.productContentImage"/>
+                                                      </span>
+                                                      <span class="btn btn-danger" ng-click="obj.flow.cancel()"> <i class="fa fa-times"></i> </span>
+                                                   </div>
+                                                   <div class="user-image-buttons" ng-if="!obj.flow.files.length">
+                                                      <span class="btn btn-primary btn-file">
+                                                      <i class="fa fa-pencil"></i>
+                                                      <input type="file" flow-btn />
+                                                      </span>
+                                                      <span class="btn btn-danger" ng-if="!noImage" ng-click="removeImage()"><i class="fa fa-times"></i></span>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-md-12">
+                                          <img src="{{manufacturerImage}}" alt="" style="max-width: 100%; width:100%" />
+                                       </div>
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-md-12">
+                                          <div class="form-group" ng-class="{'has-error':Form.promotionalHeadline.$dirty && Form.promotionalHeadline.$invalid, 'has-success':Form.promotionalHeadline.$valid}">
+                                             <label> Promotional Headlines <span class="symbol required"></span> </label>
+                                             <textarea placeholder="Promotional Headlines" id="promotionalHeadline" class="form-control" name="promotionalHeadline" ng-model="cloneForm.promotionalHeadline" required="true" rows="5" wm-block wm-block-length="150">
+                                             </textarea>
+                                             <span class="error text-small block" ng-if="Form.promotionalHeadline.$dirty && Form.promotionalHeadline.$invalid">This field is required.</span>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-6">
+                                    <div class="row">
+                                       <div class="col-md-12">
+                                          <img src="{{manufacturerImage}}" alt="" style="max-width: 100%; width:100%" />
+                                       </div>
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-md-12">
+                                          <div class="form-group" ng-class="{'has-error':Form.promotionalText.$dirty && Form.promotionalText.$invalid, 'has-success':Form.promotionalText.$valid}">
+                                             <label> Promotional Text <span class="symbol required"></span> </label>
+                                             <textarea placeholder="Promotional Text" id="promotionalText" class="form-control" name="promotionalText" ng-model="cloneForm.promotionalText" required="true" rows="5"  wm-block wm-block-length="200"></textarea>
+                                             <span class="error text-small block" ng-if="Form.promotionalText.$dirty && Form.promotionalText.$invalid">This field is required and enter 40 character only.</span>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-md-12">
+                                          <div class="form-group" ng-class="{'has-error':Form.disclaimer.$dirty && Form.disclaimer.$invalid, 'has-success':Form.disclaimer.$valid}">
+                                             <label> Disclaimer <span class="symbol required"></span> </label>
+                                             <textarea placeholder="Disclaimer" id="disclaimer" class="form-control" name="disclaimer" ng-model="cloneForm.disclaimer" required="true" rows="5" wm-block wm-block-length="200"></textarea>
+                                             <span class="error text-small block" ng-if="Form.disclaimer.$dirty && Form.disclaimer.$invalid">This field is required.</span>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </fieldset>
+                        </div>
+                        <div class="col-md-6">
+                           <fieldset>
+                              <legend>
+                                 Additional Details
+                              </legend>
+                              <div class="row">
+                                 <div class="col-md-12">
+                                    <div class="form-group" ng-class="{'has-error':Form.firstTag.$dirty && Form.firstTag.$invalid, 'has-success':Form.firstTag.$valid}">
+                                       <label> First Tag <span class="symbol required"></span> </label>
+                                       <input type="text" ng-model="cloneForm.firstTag" name="firstTag" placeholder="First Tag" uib-typeahead="tags.tag for tags in getTags($viewValue)" typeahead-no-results="noResults" class="form-control" required="true">
+                                       <!-- <input type="text" placeholder="First Tag" class="form-control" name="firstTag" ng-model="cloneForm.firstTag" required="true" /> -->
+                                       <span class="error text-small block" ng-if="Form.firstTag.$dirty && Form.firstTag.$invalid">First Tag is required.</span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class="col-md-12">
+                                    <div class="form-group" ng-class="{'has-error':Form.secondTag.$dirty && Form.secondTag.$invalid, 'has-success':Form.secondTag.$valid}">
+                                       <label> Second Tag <span class="symbol required"></span> </label>
+                                       <input type="text" ng-model="cloneForm.secondTag" name="secondTag" placeholder="Second Tag" uib-typeahead="tags.tag for tags in getTags($viewValue)" typeahead-no-results="noResults" class="form-control" required="true">
+                                       <!-- <input type="text" placeholder="Second Tag" class="form-control" name="secondTag" ng-model="cloneForm.secondTag" required="true" /> -->
+                                       <span class="error text-small block" ng-if="Form.secondTag.$dirty && Form.secondTag.$invalid">Second Tag is required.</span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class="col-md-12">
+                                    <div class="form-group" ng-class="{'has-error':Form.thirdTag.$dirty && Form.thirdTag.$invalid, 'has-success':Form.thirdTag.$valid}">
+                                       <label> Third Tag <span class="symbol required"></span> </label>
+                                        <input type="text" ng-model="cloneForm.thirdTag" name="thirdTag" placeholder="Third Tag" uib-typeahead="tags.tag for tags in getTags($viewValue)" typeahead-no-results="noResults" class="form-control" required="true">
+                                       <!-- <input type="text" placeholder="Third Tag" class="form-control" name="thirdTag" ng-model="cloneForm.thirdTag" required="true" /> -->
+                                       <span class="error text-small block" ng-if="Form.thirdTag.$dirty && Form.thirdTag.$invalid">Third Tag is required.</span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class="col-md-12">
+                                    <div class="form-group" ng-class="{'has-error':Form.startEndDate.$dirty && Form.startEndDate.$invalid, 'has-success':Form.startEndDate.$valid}">
+                                       <label>Date Range <span class="symbol required"></span></label>
+                                       <input type="text" class="form-control" ng-model="startEndDate" id="startEndDate" name="startEndDate" required="true" />
+                                       <!-- <input type="daterange" class="form-control" ng-model="startEndDate" required="true" limit="7 days" min-date="{{minDate}}"/> -->
+                                       <span class="error text-small block" ng-if="Form.startEndDate.$dirty && Form.startEndDate.$invalid">Date range is required.</span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <button class="btn btn-yellow next-step btn-wide pull-right">
+                                 Submit
+                              </button>
+                           </fieldset>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

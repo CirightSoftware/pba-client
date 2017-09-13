@@ -1,0 +1,108 @@
+<!-- start: BREADCRUMB -->
+<div class="breadcrumb-wrapper" ng-controller="offerDetailsCtrl">
+	<h4 class="mainTitle no-margin"> {{productName}} </h4>
+	<span class="mainDescription"></span>
+    <div ncy-breadcrumb class="pull-right"></div>
+</div>
+<!-- end: BREADCRUMB -->
+<!-- start: FIRST SECTION -->
+<div class="container-fluid container-fullw padding-bottom-10" ng-controller="offerDetailsCtrl">
+	<div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <div class="clearfix padding-5 padding-top-10 padding-bottom-10 space5">
+					<div class="col-xs-4 text-center no-padding">
+						<div class="border-right border-dark">
+							<span class="text-bold block text-extra-large">{{totalLikesFavObj.totalLikes}}</span>
+							<span class="text-light">Total Likes</span>
+						</div>
+					</div>
+					<div class="col-xs-4 text-center no-padding">
+						<div class="border-right border-dark">
+							<span class="text-bold block text-extra-large">{{totalLikesFavObj.totalFavorites}}</span>
+							<span class="text-light">Total Favorites</span>
+						</div>
+					</div>
+					<div class="col-xs-4 text-center no-padding" ng-show="totalLikesFavObj.timeRemain >= 0">
+						<span class="text-bold block text-extra-large">{{totalLikesFavObj.timeRemain}}D</span>
+						<span class="text-light">Time Remaining</span>
+					</div>
+					<div class="col-xs-4 text-center no-padding" ng-show="totalLikesFavObj.timeRemain < 0">
+						<span class="text-bold block text-extra-large">Offer Expired</span>
+					</div>
+				</div>
+            </div>
+        </div>
+        <div class="col-md-3 pull-right">
+            <div class="form-group">
+                <span class="clip-select">
+                    <select ng-model="cmbProductId" id="cmbProductId" name="cmbProductId" class="form-control" ng-change="getPromotionalData()">
+                         <option value="-1">-Select Promotion-</option>
+                         <option ng-repeat="productOption in productList" value="{{productOption.id}}">{{productOption.name}}</option>
+                    </select>
+                </span>
+            </div>
+        </div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="panel panel-white no-radius">
+				<div class="panel-heading border-bottom">
+					<h4 class="panel-title">Promotion Chart </h4>
+				</div>
+				<div class="panel-body">
+					<canvas class="chart chart-bar" chart-data="barData" chart-options="barOptions" chart-labels="barLabels" chart-series="barSeries" chart-colours="barColors" height="250px"></canvas>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			 <div class="panel panel-white no-radius">
+                <div class="panel-heading border-bottom">
+					<h4 class="panel-title">Sex</h4>
+				</div>
+                <div class="panel-body padding-20">
+                	<div class="text-right">
+						<button id="btnLike" class="btn btn-xs btn-grey active" ng-click="getProductPieChart(1)">
+							Likes
+						</button>
+						<button id="btnFavorite" class="btn btn-xs btn-grey" ng-click="getProductPieChart(2)">
+							Favorites
+						</button>
+					</div>
+                   <div class="margin-top-25">
+                        <div class="text-center margin-bottom-15">
+                            <canvas class="chart chart-doughnut" chart-data="pieData" chart-options="pieOptions" chart-labels="pieLabels" chart-series="pieSeries" chart-colours="pieColors" chart-legend="true"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="panel panel-white no-radius">
+                <div class="panel-heading border-bottom">
+					<h4 class="panel-title">Breakdown Of Age Group </h4>
+				</div>
+                <div class="panel-body padding-20">
+					<div class="panel-body">
+						<canvas class="chart chart-bar" chart-data="ageGroupData" chart-options="ageGroupOptions" chart-labels="ageGroupLabels" chart-series="ageGroupSeries" chart-colours="ageGroupColors" height="250px"></canvas>
+					</div>
+                </div>
+            </div>
+		</div>
+		<div class="col-md-6">
+			<div class="panel panel-white no-radius">
+                <div class="panel-heading border-bottom">
+					<h4 class="panel-title">Breakdown Of Zip Code </h4>
+				</div>
+                <div class="panel-body padding-20">
+					<div class="panel-body">
+						<canvas class="chart chart-bar" chart-data="zipCodeData" chart-options="zipCodeOptions" chart-labels="zipCodeLabels" chart-series="zipCodeSeries" chart-colours="zipCodeColors" height="250px"></canvas>
+					</div>
+                </div>
+            </div>
+		</div>
+	</div>
+</div>
+<!-- end: FIRST SECTION -->

@@ -1,0 +1,116 @@
+<!-- start: BREADCRUMB -->
+<div class="breadcrumb-wrapper">
+	<h4 class="mainTitle no-margin" translate="dashboard.WELCOME" translate-values="{ appName: app.name }">WELCOME TO Spectrum</h4>
+	<span class="mainDescription">overview &amp; stats </span>
+	<div ncy-breadcrumb class="pull-right"></div>
+</div>
+<!-- end: BREADCRUMB -->
+<!-- start: FIRST SECTION -->
+<div class="container-fluid container-fullw padding-bottom-10" ng-controller="dashboardCtrl">
+	<div class="row">
+		<div class="col-md-3 pull-left">
+			<h2 class="inline-block"> Top 3 Promotions </h2>
+		</div>
+        <div class="col-md-3 pull-right">
+            <div class="form-group">
+                <span class="clip-select">
+                    <select ng-model="cmbProductId" id="cmbProductId" name="cmbProductId" class="form-control" ng-change="getPromotionalData()">
+                         <option value="-1">-Select Promotion-</option>
+                         <option ng-repeat="productOption in productList" value="{{productOption.id}}">{{productOption.name}}</option>
+                    </select>
+                </span>
+            </div>
+        </div>
+	</div>
+	<div class="row">
+		<div class="col-sm-6 col-lg-4" ng-repeat="productObj in topThreeProducts">
+			<div class="panel panel-white no-border">
+				<div class="panel-body no-padding">
+					<div class="space10 padding-15">
+						<h5 class="text-bold text-extra-small text-dark-transparent text-uppercase no-margin">{{productObj.contentName}}</h5>
+					</div>
+					<div class="margin-10">
+					<canvas class="chart chart-bar height-100" ng-if="data.length > 0" chart-data="data[productObj.contentId]" chart-options="options" chart-labels="labels[productObj.contentId]" chart-series="series" chart-colours="colors"></canvas>
+					</div>
+					<div>
+						<p class="margin-10" ng-show="productObj.noOfDays >= 0">
+							<span class="text-light margin-right-5">Time Remaining:</span><span>{{productObj.noOfDays}}D</span>
+						</p>
+						<p class="margin-10" ng-show="productObj.noOfDays < 0">
+							<span  class="text-light margin-right-5"><b>Expired</b></span>
+						</p>
+						<p class="margin-10">
+							<span class="text-light margin-right-5"><i class="fa fa-thumbs-o-up"></i> Likes:</span><span>{{productObj.likes}}</span>
+						</p>
+						<p class="margin-10">
+							<span class="text-light margin-right-5"><i class="fa fa-heart"></i> Favorites:</span><span>{{productObj.favorites}}</span>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>		
+		<!-- <div class="col-sm-6 col-lg-3">
+			<div class="panel panel-dark border-light">
+				<ct-paneltool class="panel-tools"></ct-paneltool>
+				<div class="panel-body no-padding">
+					<div class="padding-15">
+						<h5 class="text-bold text-small text-white text-uppercase no-margin"> Total Checkins</h5>
+						<h2 class="text-white margin-top-10"> {{checkInCount}} </h2>
+					</div>
+					<div ng-controller="ProductsCtrl" class="margin-10  margin-top-0">
+						<canvas class="chart chart-line height-80" chart-data="data" chart-options="options" chart-labels="labels" chart-series="series" chart-colours="colors"></canvas>
+					</div>
+				</div>
+			</div>
+		</div> -->
+	</div>
+	<!-- <div class="row">
+		<div class="col-sm-9">
+			<p class="margin-top-15 pull-right">
+				<a href="#/app/productAnalytics"><i class="fa fa-plus-circle text-green"></i>
+				<span class="text-light margin-left-10">More </span></a>
+			</p>
+		</div>	
+	</div> -->
+</div>
+<!-- end: FIRST SECTION -->
+<!-- start: SECOND SECTION -->
+<div class="container-fluid container-fullw padding-bottom-10">
+	<div class="row">
+		<div class="col-md-6">
+			<div class="panel panel-white no-radius">
+				<div class="panel-heading border-bottom">
+					<h4 class="panel-title">Promotion Chart</h4>
+				</div>
+				<div class="panel-body">
+					<div ng-controller="barChartCtrl" id="divBarChartId">
+						<canvas class="chart chart-bar" id="canvasBarChartId" chart-data="data" chart-options="options" chart-labels="labels" chart-series="series" chart-colours="colors" height="300px" chart-click="handleShow"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6" ng-controller="pieChartCtrl">
+			 <div class="panel panel-white no-radius">
+                <div class="panel-heading border-bottom">
+					<h4 class="panel-title">Sex</h4>
+				</div>
+                <div class="panel-body padding-20">
+					<div class="text-right">
+						<button id="btnLike" class="btn btn-xs btn-grey active" ng-click="getProductPieChart(1)">
+							Likes
+						</button>
+						<button id="btnFavorite" class="btn btn-xs btn-grey" ng-click="getProductPieChart(2)">
+							Favorites
+						</button>
+					</div>
+                   <div class="margin-top-25">
+                        <div class="text-center margin-bottom-15">
+                            <canvas class="chart chart-pie" chart-data="data" chart-options="options" chart-labels="labels" chart-series="series" chart-colours="colors" chart-legend="true"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		</div>
+	</div>
+</div>
+<!-- end: SECOND SECTION -->

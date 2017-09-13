@@ -1,0 +1,728 @@
+<!-- start: REGISTRATION -->
+<div class="row">
+   <div class="main-login col-xs-10 col-xs-offset-3 col-sm-8 col-sm-offset-2">
+      <div class="logo text-center">
+      </div>
+      <!-- start: WIZARD DEMO -->
+      <div class="container-fluid container-fullw">
+         <div class="row">
+            <div class="col-md-12">
+               <div class="panel panel-white">
+                  <div class="panel-body">
+                     <!-- /// controller:  'registrationCtrl' -  localtion: assets/js/controllers/registrationCtrl.js /// -->
+                     <div ng-controller="registrationCtrl">
+                        <div class="alert alert-block alert-danger fade in" ng-show="notificationSuccess == 0 && submited == 1">
+                           <h4 class="alert-heading margin-bottom-10"><i class="ti-close"></i> Error!</h4>
+                           <p class="margin-bottom-10">
+                              {{notificationMessage}}
+                           </p>
+                        </div>
+                        <div class="alert alert-block alert-success fade in" ng-show="notificationSuccess == 1">
+                           <h4 class="alert-heading margin-bottom-10"><i class="ti-check"></i> Success!</h4>
+                           <p class="margin-bottom-10">
+                              {{notificationMessage}}
+                           </p>
+                        </div>
+                        <!-- start: WIZARD FORM -->
+                        <form name="Form" id="form" novalidate method="POST">
+                           <div id="wizard" class="swMain">
+                              <!-- start: WIZARD SEPS -->
+                              <ul ng-show="submited == 0">
+                                 <li ng-click="form.goTo(Form, 1)">
+                                    <a href ng-class="{'selected' : currentStep >= 1, 'done' : currentStep > 1}">
+                                       <div class="stepNumber">
+                                          1
+                                       </div>
+                                       <span class="stepDesc text-small"> Business Details </span>
+                                    </a>
+                                 </li>
+                                 <li ng-click="form.goTo(Form, 2)">
+                                    <a href ng-class="{'selected' : currentStep >= 2, 'done' : currentStep > 2}">
+                                       <div class="stepNumber">
+                                          2
+                                       </div>
+                                       <span class="stepDesc text-small"> Business Hours </span>
+                                    </a>
+                                 </li>
+                                 <li ng-click="form.goTo(Form, 3)">
+                                    <a href ng-class="{'selected' : currentStep >= 3, 'done' : currentStep > 3}">
+                                       <div class="stepNumber">
+                                          3
+                                       </div>
+                                       <span class="stepDesc text-small"> Billing Details </span>
+                                    </a>
+                                 </li>
+                                 <li ng-click="form.goTo(Form, 4)">
+                                    <a href ng-class="{'selected' : currentStep >= 4, 'done' : currentStep > 4}">
+                                       <div class="stepNumber">
+                                          4
+                                       </div>
+                                       <span class="stepDesc text-small"> Complete </span>
+                                    </a>
+                                 </li>
+                              </ul>
+                              <!-- end: WIZARD SEPS -->
+                              <!-- start: WIZARD STEP 1 -->
+                              <div id="step-1" ng-show="currentStep == 1">
+                                 <div class="row">
+                                    <div class="col-md-6">
+                                       <fieldset>
+                                          <legend>
+                                             Merchant Information
+                                          </legend>
+                                          <div class="row">
+                                             <div class="col-md-12">
+                                                <div class="form-group" ng-class="{'has-error':Form.manufacturerName.$dirty && Form.manufacturerName.$invalid, 'has-success':Form.manufacturerName.$valid}">
+                                                   <label> Merchant Name <span class="symbol required"></span> </label>
+                                                   <input type="text" placeholder="Enter Merchant Name" class="form-control" name="manufacturerName" ng-model="regFrom.manufacturerName" ng-required="currentStep == 1" />
+                                                   <span class="error text-small block" ng-if="Form.manufacturerName.$dirty && Form.manufacturerName.$invalid">Merchant Name is required.</span>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="row">
+                                             <div class="col-md-12">
+                                                <div class="form-group" ng-class="{'has-error':Form.website.$dirty && Form.website.$invalid, 'has-success':Form.website.$valid}">
+                                                   <label> Website <span class="symbol required"></span> </label>
+                                                   <input type="text" placeholder="Enter Website" class="form-control" name="website" ng-model="regFrom.website" ng-required="currentStep == 1" />
+                                                   <span class="error text-small block" ng-if="Form.website.$dirty && Form.website.$invalid">Web Site is required.</span>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </fieldset>
+                                       <fieldset>
+                                          <legend>
+                                             Personal Information
+                                          </legend>
+                                          <div class="row">
+                                             <div class="col-md-12">
+                                                <div class="form-group" ng-class="{'has-error':Form.firstName.$dirty && Form.firstName.$invalid, 'has-success':Form.firstName.$valid}">
+                                                   <label> First Name <span class="symbol required"></span> </label>
+                                                   <input type="text" placeholder="Enter your First Name" class="form-control" name="firstName" ng-model="regFrom.firstName" ng-required="currentStep == 1" />
+                                                   <span class="error text-small block" ng-if="Form.firstName.$dirty && Form.firstName.$invalid">First Name is required.</span>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </fieldset>
+                                       <fieldset>
+                                          <legend>
+                                             Contact Information
+                                          </legend>
+                                          <div class="row">
+                                             <div class="col-md-12">
+                                                <div class="form-group" ng-class="{'has-error':Form.phoneNumber.$dirty && Form.phoneNumber.$invalid, 'has-success':Form.phoneNumber.$valid}">
+                                                   <label class="control-label"> Phone Number <span class="symbol required"></span> </label>
+                                                   <input type="text" class="form-control" name="phoneNumber" ng-model="regFrom.phoneNumber" ui-mask="999 999 9999" ng-required="currentStep == 1"/>
+                                                   <span class="error text-small block" ng-if="Form.phoneNumber.$dirty && Form.phoneNumber.$invalid">Phone Number is required.</span>
+                                                   <span class="error text-small block" ng-if="Form.phoneNumber.$error.phoneNumber">Please, enter a valid phone number.</span>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </fieldset>
+                                       <fieldset>
+                                          <legend>
+                                             Category Information
+                                          </legend>
+                                          <div class="row">
+                                                <div class="col-md-12">
+                                                   <div class="form-group" >
+                                                      <div flow-init flow-name="obj.flow" 
+                                                         flow-files-added="processFiles($files)">
+                                                         <div class="user-image">
+                                                            <div class="thumbnail">
+                                                               <img ng-src="assets/images/default-user.png" alt="" ng-if="!obj.flow.files.length && noImage">
+                                                               <img ng-src="{{regFrom.promotionalImage}}" alt="" ng-if="!obj.flow.files.length && !noImage">
+                                                               <img flow-img="obj.flow.files[0]" ng-if="obj.flow.files.length">
+                                                            </div>
+                                                            <div class="user-image-buttons" ng-if="obj.flow.files.length">
+                                                               <span class="btn btn-primary btn-file">
+                                                               <i class="fa fa-pencil"></i>
+                                                               <input type="file" flow-btn ng-model="regFrom.promotionalImageBase64"/>
+                                                               </span>
+                                                               <span class="btn btn-danger" ng-click="obj.flow.cancel()"> <i class="fa fa-times"></i> </span>
+                                                            </div>
+                                                            <div class="user-image-buttons" ng-if="!obj.flow.files.length">
+                                                               <span class="btn btn-primary btn-file">
+                                                               <i class="fa fa-pencil"></i>
+                                                               <input type="file" flow-btn />
+                                                               </span>
+                                                               <span class="btn btn-danger" ng-if="!noImage" ng-click="removeImage()"><i class="fa fa-times"></i></span>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          <div class="row">
+                                             <div class="col-md-6">
+                                                <div class="form-group" ng-class="{'has-error':Form.disciplineStr.$dirty && Form.disciplineStr.$invalid, 'has-success':Form.disciplineStr.$valid}">
+                                                   <label>
+                                                      Business Category 
+                                                      <span class="symbol required"></span>
+                                                   </label>
+                                                   <span class="clip-select">
+                                                      <select class="form-control" name="disciplineStr" id="disciplineStr" 
+                                                      ng-model="regFrom.disciplineStr" ng-required="currentStep == 1">
+                                                         <option value="">Select Category</option>
+                                                         <option ng-repeat="disciplineOption in disciplineData"  value="{{disciplineOption.key}}">{{disciplineOption.value}}</option>
+                                                      </select>
+                                                   <span class="error text-small block"   ng-if="Form.disciplineStr.$dirty && Form.disciplineStr.$invalid">    Business Category is Required.</span>
+                                                   </span>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </fieldset>
+                                    </div>
+                                    <div class="col-md-6">
+                                       <fieldset>
+                                          <legend>
+                                             Account Information
+                                          </legend>
+                                          <div class="row">
+                                             <div class="col-md-12">
+                                                <div class="form-group" ng-class="{'has-error':Form.emailAddress.$dirty &&     Form.emailAddress.$invalid, 'has-success':Form.emailAddress.$valid}">
+                                                   <label class="control-label"> Email <span class="symbol required"></span> </label>
+                                                   <input type="email" placeholder="Enter valid E-mail" class="form-control" name="emailAddress" ng-model="regFrom.emailAddress" ng-required="currentStep == 1">
+                                                   <span class="error text-small block" ng-if="Form.emailAddress.$dirty && Form.emailAddress.$error.required">Email is required.</span>
+                                                   <span class="error text-small block" ng-if="Form.emailAddress.$error.emailAddress">Please, enter a valid email address.</span>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="row">
+                                             <div class="col-md-12">
+                                                <div class="form-group" ng-class="{'has-error':Form.password1.$dirty && Form.password1.$invalid, 'has-success':Form.password1.$valid}">
+                                                   <label class="control-label"> Password <span class="symbol required"></span> </label>
+                                                   <input type="password" placeholder="Enter Password" class="form-control" name="password1" ng-model="regFrom.password1" ng-required="currentStep == 1" />
+                                                   <span class="error text-small block" ng-if="Form.password1.$dirty && Form.password1.$error.required">Password is required.</span>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </fieldset>
+                                       <fieldset>
+                                          <legend>
+                                             Address Information
+                                          </legend>
+                                          <div class="row">
+                                             <div class="col-md-12">
+                                                <div class="form-group" ng-class="{'has-error':Form.address1.$dirty && Form.address1.$invalid, 'has-success':Form.address1.$valid}">
+                                                   <label> Address1 <span class="symbol required"></span> </label>
+                                                   <input type="text" placeholder="Enter Address1" class="form-control" name="address1" ng-model="regFrom.address1" ng-required="currentStep == 1" />
+                                                   <span class="error text-small block" ng-if="Form.address1.$dirty && Form.address1.$invalid">Address 1 is required.</span>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="row">
+                                             <div class="col-md-12">
+                                                <div class="form-group">
+                                                   <label> Address2 </label>
+                                                   <input type="text" placeholder="Enter Address2" class="form-control" name="address2" ng-model="regFrom.address2" />
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="row">
+                                             <div class="col-md-12">
+                                                <div class="form-group" ng-class="{'has-error':Form.state.$dirty && Form.state.$invalid, 'has-success':Form.state.$valid}">
+                                                   <label> State <span class="symbol required"></span> </label>
+                                                   <span class="clip-select">
+                                                      <select class="form-control" name="state" id="state" ng-model="regFrom.state" 
+                                                           ng-pattern="/^[0-9]{1,7}$/" ng-required="currentStep == 1">
+                                                         <option value="-1">Select State</option>
+                                                         <option ng-repeat="stateOption in stateData" value="{{stateOption.key}}">{{stateOption.value}}</option>
+                                                      </select>
+                                                      <span class="error text-small block" ng-if="Form.state.$dirty && Form.state.$invalid">State is Required.</span>
+                                                   </span>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="row">
+                                             <div class="col-md-12">
+                                                <div class="form-group" ng-class="{'has-error':Form.city.$dirty && Form.city.$invalid, 'has-success':Form.city.$valid}">
+                                                   <label> City <span class="symbol required"></span> </label>
+                                                   <input type="text" placeholder="Enter City" class="form-control" name="city" ng-model="regFrom.city" ng-required="currentStep == 1" />
+                                                   <span class="error text-small block" ng-if="Form.city.$dirty && Form.city.$invalid">City is required.</span>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="row">
+                                             <div class="col-md-12">
+                                                <div class="form-group" ng-class="{'has-error':Form.zipCode.$dirty && Form.zipCode.$invalid, 'has-success':Form.zipCode.$valid}">
+                                                   <label> Zip <span class="symbol required"></span> </label>
+                                                   <input type="text" placeholder="Enter Zip code" class="form-control" name="zipCode" ng-model="regFrom.zipCode" ng-required="currentStep == 1" />
+                                                   <span class="error text-small block" ng-if="Form.zipCode.$dirty && Form.zipCode.$invalid">Zip code is required.</span>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </fieldset>
+                                       <div class="form-group">
+                                          <button class="btn btn-primary btn-o next-step btn-wide pull-right" ng-click="form.next(Form)">
+                                          Next <i class="fa fa-arrow-circle-right"></i>
+                                          </button>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- end: WIZARD STEP 1 -->
+                              <!-- start: WIZARD STEP 2 -->
+                              <div id="step-2" ng-show="currentStep == 2">
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                       <fieldset>
+                                          <legend>
+                                             Location Information
+                                          </legend>
+                                          <div class="col-md-12">
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <div class="form-group">
+                                                      <div class="col-md-2">
+                                                         <input type="checkbox" ng-model="regFrom.chkOpentime1" name="chkOpentime1" id="chkOpentime1" ng-true-value="1" ng-false-value="0" ng-change="changed1();" style="vertical-align: -40px;"/> <label class="control-label" style="vertical-align: -40px;"> Sun</label>
+                                                      </div>
+                                                      <div class="col-md-8">
+                                                         <div class="col-md-5">
+                                                            <uib-timepicker ng-model="regFrom.openTime1" id="openTime1" name="openTime1" ng-disabled="regFrom.chkOpentime1 == 0"  ng-required="regFrom.chkOpentime1 == 1" hour-step="1" minute-step="1" show-meridian="true"></uib-timepicker>
+                                                         </div>
+                                                         <div class="col-md-2">
+                                                            <label class="control-label" style="vertical-align: -40px;">to</label>
+                                                         </div>
+                                                         <div class="col-md-5">
+                                                            <uib-timepicker ng-model="regFrom.closeTime1" id="closeTime1" name="closeTime1" ng-disabled="regFrom.chkOpentime1 == 0"  ng-required="regFrom.chkOpentime1 == 1" hour-step="1" minute-step="1" show-meridian="true"></uib-timepicker>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <div class="form-group">
+                                                      <div class="col-md-2">
+                                                         <input type="checkbox" ng-model="regFrom.chkOpentime2" name="chkOpentime2" id="chkOpentime2" ng-true-value="1" ng-false-value="0" ng-change="changed2();" style="vertical-align: -40px;"/> <label class="control-label" style="vertical-align: -40px;"> Mon</label>
+                                                      </div>
+                                                      <div class="col-md-8">
+                                                         <div class="col-md-5">
+                                                            <uib-timepicker ng-model="regFrom.openTime2" id="openTime2" name="openTime2" ng-disabled="regFrom.chkOpentime2 == 0" ng-required="regFrom.chkOpentime2 == 1" hour-step="1" minute-step="1" show-meridian="true"></uib-timepicker>
+                                                         </div>
+                                                         <div class="col-md-2">
+                                                            <label class="control-label" style="vertical-align: -40px;">to</label>
+                                                         </div>
+                                                         <div class="col-md-5">
+                                                            <uib-timepicker ng-model="regFrom.closeTime2" id="closeTime2" name="closeTime2" ng-disabled="regFrom.chkOpentime2 == 0" ng-required="regFrom.chkOpentime2 == 1" hour-step="1" minute-step="1" show-meridian="true"></uib-timepicker>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <div class="form-group">
+                                                      <div class="col-md-2">
+                                                         <input type="checkbox" ng-model="regFrom.chkOpentime3" name="chkOpentime3" id="chkOpentime3" ng-true-value="1" ng-false-value="0" ng-change="changed3();" style="vertical-align: -40px;"/> <label class="control-label" style="vertical-align: -40px;"> Tue</label>
+                                                      </div>
+                                                      <div class="col-md-8">
+                                                         <div class="col-md-5">
+                                                            <uib-timepicker ng-model="regFrom.openTime3" id="openTime3" name="openTime3" ng-disabled="regFrom.chkOpentime3 == 0" ng-required="regFrom.chkOpentime3 == 1" hour-step="1" minute-step="1" show-meridian="true"></uib-timepicker>
+                                                         </div>
+                                                         <div class="col-md-2">
+                                                            <label class="control-label" style="vertical-align: -40px;">to</label>
+                                                         </div>
+                                                         <div class="col-md-5">
+                                                            <uib-timepicker ng-model="regFrom.closeTime3" id="closeTime3" name="closeTime3" ng-disabled="regFrom.chkOpentime3 == 0" ng-required="regFrom.chkOpentime3 == 1" hour-step="1" minute-step="1" show-meridian="true"></uib-timepicker>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <div class="form-group">
+                                                      <div class="col-md-2">
+                                                         <input type="checkbox" ng-model="regFrom.chkOpentime4" name="chkOpentime4" id="chkOpentime4" ng-true-value="1" ng-false-value="0" ng-change="changed4();" style="vertical-align: -40px;"/> <label class="control-label" style="vertical-align: -40px;"> Wed</label>
+                                                      </div>
+                                                      <div class="col-md-8">
+                                                         <div class="col-md-5">
+                                                            <uib-timepicker ng-model="regFrom.openTime4" id="openTime4" name="openTime4" ng-disabled="regFrom.chkOpentime4 == 0" ng-required="regFrom.chkOpentime4 == 1" hour-step="1" minute-step="1" show-meridian="true"></uib-timepicker>
+                                                         </div>
+                                                         <div class="col-md-2">
+                                                            <label class="control-label" style="vertical-align: -40px;">to</label>
+                                                         </div>
+                                                         <div class="col-md-5">
+                                                            <uib-timepicker ng-model="regFrom.closeTime4" id="closeTime4" name="closeTime4" ng-disabled="regFrom.chkOpentime4 == 0" ng-required="regFrom.chkOpentime4 == 1" hour-step="1" minute-step="1" show-meridian="true"></uib-timepicker>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <div class="form-group">
+                                                      <div class="col-md-2">
+                                                         <input type="checkbox" ng-model="regFrom.chkOpentime5" name="chkOpentime5" id="chkOpentime5" ng-true-value="1" ng-false-value="0" ng-change="changed5();" style="vertical-align: -40px;"/> <label class="control-label" style="vertical-align: -40px;"> Thu</label>
+                                                      </div>
+                                                      <div class="col-md-8">
+                                                         <div class="col-md-5">
+                                                            <uib-timepicker ng-model="regFrom.openTime5" id="openTime5" name="openTime5" ng-disabled="regFrom.chkOpentime5 == 0" ng-required="regFrom.chkOpentime5 == 1" hour-step="1" minute-step="1" show-meridian="true"></uib-timepicker>
+                                                         </div>
+                                                         <div class="col-md-2">
+                                                            <label class="control-label" style="vertical-align: -40px;">to</label>
+                                                         </div>
+                                                         <div class="col-md-5">
+                                                            <uib-timepicker ng-model="regFrom.closeTime5" id="closeTime5" name="closeTime5" ng-disabled="regFrom.chkOpentime5 == 0" ng-required="regFrom.chkOpentime5 == 1" hour-step="1" minute-step="1" show-meridian="true"></uib-timepicker>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <div class="form-group">
+                                                      <div class="col-md-2">
+                                                         <input type="checkbox" ng-model="regFrom.chkOpentime6" name="chkOpentime6" id="chkOpentime6" ng-true-value="1" ng-false-value="0" ng-change="changed6();" style="vertical-align: -40px;"/> <label class="control-label" style="vertical-align: -40px;"> Fri</label>
+                                                      </div>
+                                                      <div class="col-md-8">
+                                                         <div class="col-md-5">
+                                                            <uib-timepicker ng-model="regFrom.openTime6" id="openTime6" name="openTime6" ng-disabled="regFrom.chkOpentime6 == 0" ng-required="regFrom.chkOpentime6 == 1" hour-step="1" minute-step="1" show-meridian="true"></uib-timepicker>
+                                                         </div>
+                                                         <div class="col-md-2">
+                                                            <label class="control-label" style="vertical-align: -40px;">to</label>
+                                                         </div>
+                                                         <div class="col-md-5">
+                                                            <uib-timepicker ng-model="regFrom.closeTime6" id="closeTime6" name="closeTime6" ng-disabled="regFrom.chkOpentime6 == 0" ng-required="regFrom.chkOpentime6 == 1" hour-step="1" minute-step="1" show-meridian="true"></uib-timepicker>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <div class="form-group">
+                                                      <div class="col-md-2">
+                                                         <input type="checkbox" ng-model="regFrom.chkOpentime7" name="chkOpentime7" id="chkOpentime7" ng-true-value="1" ng-false-value="0" ng-change="changed7();" style="vertical-align: -40px;"/> <label class="control-label" style="vertical-align: -40px;"> Sat</label>
+                                                      </div>
+                                                      <div class="col-md-8">
+                                                         <div class="col-md-5">
+                                                            <uib-timepicker ng-model="regFrom.openTime7" id="openTime7" name="openTime7" ng-disabled="regFrom.chkOpentime7 == 0" ng-required="regFrom.chkOpentime7 == 1" hour-step="1" minute-step="1" show-meridian="true"></uib-timepicker>
+                                                         </div>
+                                                         <div class="col-md-2">
+                                                            <label class="control-label" style="vertical-align: -40px;">to</label>
+                                                         </div>
+                                                         <div class="col-md-5">
+                                                            <uib-timepicker ng-model="regFrom.closeTime7" id="closeTime7" name="closeTime7" ng-disabled="regFrom.chkOpentime7 == 0" ng-required="regFrom.chkOpentime7 == 1" hour-step="1" minute-step="1" show-meridian="true"></uib-timepicker>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </fieldset>
+                                       </div>
+                                       <div class="col-md-12">
+                                          <div class="form-group">
+                                             <button class="btn btn-primary btn-o back-step btn-wide pull-left" ng-click="form.prev(Form)">
+                                             <i class="fa fa-circle-arrow-left"></i> Back
+                                             </button>
+                                             <button class="btn btn-primary btn-o next-step btn-wide pull-right" ng-click="form.next(Form)">
+                                             Next <i class="fa fa-arrow-circle-right"></i>
+                                             </button>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <!-- end: WIZARD STEP 2 -->
+                                 <!-- start: WIZARD STEP 3 -->
+                                 <div id="step-3" ng-show="currentStep == 3">
+                                    <div class="row">
+                                       <div class="col-md-6">
+                                          <fieldset>
+                                             <legend>
+                                                Card Details
+                                             </legend>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <div class="form-group" ng-class="{'has-error':Form.nameOnCard.$dirty && Form.nameOnCard.$invalid, 'has-success':Form.nameOnCard.$valid}">
+                                                      <label> Name On Card <span class="symbol required"></span> </label>
+                                                      <input type="text" placeholder="Enter Name on card" class="form-control" name="nameOnCard" ng-model="regFrom.nameOnCard" ng-required="currentStep == 3" />
+                                                      <span class="error text-small block" ng-if="Form.nameOnCard.$dirty && Form.nameOnCard.$invalid">Name On card is required.</span>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <div class="form-group" ng-class="{'has-error':Form.cardNo.$dirty && Form.cardNo.$invalid, 'has-success':Form.cardNo.$valid}">
+                                                      <label> Card Number <span class="symbol required"></span> </label>
+                                                      <input type="text" ui-mask="9999 9999 9999 9999" class="form-control" name="cardNo" ng-model="regFrom.cardNo" ng-required="currentStep == 3" />
+                                                      <span class="error text-small block" ng-if="Form.cardNo.$dirty && Form.cardNo.$invalid">Card number is required.</span>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <label> Expires <span class="symbol required"></span> </label>
+                                             <div class="row">
+                                                <div class="col-md-4 col-sm-6">
+                                                   <div class="form-group" ng-class="{'has-error':Form.cardExpMonth.$dirty && Form.cardExpMonth.$invalid, 'has-success':Form.cardExpMonth.$valid}">
+                                                      <label> Month <span class="symbol required"></span> </label>
+                                                      <span class="clip-select">
+                                                         <select class="form-control" name="cardExpMonth" id="cardExpMonth" ng-model="regFrom.cardExpMonth" ng-required="currentStep == 3">
+                                                            <option value="" disabled>Month</option>
+                                                            <option value="1">Jan</option>
+                                                            <option value="2">Feb</option>
+                                                            <option value="3">Mar</option>
+                                                            <option value="4">Apr</option>
+                                                            <option value="5">May</option>
+                                                            <option value="6">Jun</option>
+                                                            <option value="7">Jul</option>
+                                                            <option value="8">Aug</option>
+                                                            <option value="9">Sep</option>
+                                                            <option value="10">Oct</option>
+                                                            <option value="11">Nov</option>
+                                                            <option value="12">Dec</option>
+                                                         </select>
+                                                         <span class="error text-small block" ng-if="Form.cardExpMonth.$dirty && Form.cardExpMonth.$invalid">Month is Required.</span>
+                                                      </span>
+                                                   </div>
+                                                </div>
+                                                <div class="col-md-4 col-sm-6">
+                                                   <div class="form-group" ng-class="{'has-error':Form.cardExpYear.$dirty && Form.cardExpYear.$invalid, 'has-success':Form.cardExpYear.$valid}">
+                                                      <label> Year <span class="symbol required"></span> </label>
+                                                      <span class="clip-select">
+                                                         <select class="form-control" name="cardExpYear" id="cardExpYear" ng-model="regFrom.cardExpYear" ng-required="currentStep == 3">
+                                                            <option value="" disabled>Year</option>
+                                                            <option value="2016">2016</option>
+                                                            <option value="2017">2017</option>
+                                                            <option value="2018">2018</option>
+                                                            <option value="2019">2019</option>
+                                                            <option value="2020">2020</option>
+                                                            <option value="2021">2021</option>
+                                                            <option value="2022">2022</option>
+                                                            <option value="2023">2023</option>
+                                                            <option value="2024">2024</option>
+                                                            <option value="2025">2025</option>
+                                                            <option value="2026">2026</option>
+                                                            <option value="2027">2027</option>
+                                                         </select>
+                                                         <span class="error text-small block" ng-if="Form.cardExpYear.$dirty && Form.cardExpYear.$invalid">Month is Required.</span>
+                                                      </span>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </fieldset>
+                                       </div>
+                                       <div class="col-md-6">
+                                          <fieldset>
+                                             <legend>
+                                                Billing Details
+                                             </legend>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <div class="form-group" ng-class="{'has-error':Form.bAddress1.$dirty && Form.bAddress1.$invalid, 'has-success':Form.bAddress1.$valid}">
+                                                      <label> Address1 <span class="symbol required"></span> </label>
+                                                      <input type="text" placeholder="Enter Address1" class="form-control" name="bAddress1" ng-model="regFrom.bAddress1" ng-required="currentStep == 3" />
+                                                      <span class="error text-small block" ng-if="Form.bAddress1.$dirty && Form.bAddress1.$invalid">Billing address is required.</span>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <div class="form-group">
+                                                      <label> Address2 </label>
+                                                      <input type="text" placeholder="Enter Address2" class="form-control" name="bAddress2" ng-model="regFrom.bAddress2" />
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <div class="form-group" ng-class="{'has-error':Form.bStateId.$dirty && Form.bStateId.$invalid, 'has-success':Form.bStateId.$valid}">
+                                                      <label> State <span class="symbol required"></span> </label>
+                                                      <span class="clip-select">
+                                                         <select class="form-control" name="bStateId" id="bStateId" ng-model="regFrom.bStateId" ng-pattern="/^[0-9]{1,7}$/" ng-required="currentStep == 3">
+                                                            <option value="">Select State</option>
+                                                            <option ng-repeat="stateOption in stateData" value="{{stateOption.key}}">{{stateOption.value}}</option>
+                                                         </select>
+                                                         <span class="error text-small block" ng-if="Form.bStateId.$dirty && Form.bStateId.$invalid">State is Required.</span>
+                                                      </span>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <div class="form-group" ng-class="{'has-error':Form.bCity.$dirty && Form.bCity.$invalid, 'has-success':Form.bCity.$valid}">
+                                                      <label> City <span class="symbol required"></span> </label>
+                                                      <input type="text" placeholder="Enter City" class="form-control" name="bCity" ng-model="regFrom.bCity" ng-required="currentStep == 3" />
+                                                      <span class="error text-small block" ng-if="Form.bCity.$dirty && Form.bCity.$invalid">City is required.</span>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <div class="form-group" ng-class="{'has-error':Form.bzipCode.$dirty && Form.bzipCode.$invalid, 'has-success':Form.bzipCode.$valid}">
+                                                      <label> Zip <span class="symbol required"></span> </label>
+                                                      <input type="text" placeholder="Enter Zip code" class="form-control" name="bzipCode" ng-model="regFrom.bzipCode" ng-required="currentStep == 3" />
+                                                      <span class="error text-small block" ng-if="Form.bzipCode.$dirty && Form.bzipCode.$invalid">Zip code is required.</span>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </fieldset>
+                                       </div>
+                                       <div class="col-md-12 center">
+                                          <div class="form-group">
+                                             <button class="btn btn-primary btn-o back-step btn-wide pull-left" ng-click="form.prev(Form)">
+                                             <i class="fa fa-circle-arrow-left"></i> Back
+                                             </button>
+                                             <button class="btn btn-primary btn-o next-step btn-wide pull-right" ng-click="form.next(Form)">
+                                             Next <i class="fa fa-arrow-circle-right"></i>
+                                             </button>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <!-- end: WIZARD STEP 3 -->
+                                 <!-- start: WIZARD STEP 4 -->
+                                 <div id="step-4" ng-show="currentStep == 4 && submited == 0">
+                                    <div class="row">
+                                       <div class="col-md-12">
+                                          <div class="text-center">
+                                             <h1 class=" ti-check block text-primary"></h1>
+                                             <h2 class="StepTitle">Confirm Details!</h2>
+                                          </div>
+                                          <div class="col-md-6">
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <label> Merchant Name : </label>
+                                                   <span class="text-large">{{regFrom.manufacturerName}}</span>
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <label> Website : </label>
+                                                   <span class="text-large">{{regFrom.website}}</span>
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <label> First Name : </label>
+                                                   <span class="text-large">{{regFrom.firstName}}</span>
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <label> Email : </label>
+                                                   <span class="text-large">{{regFrom.emailAddress}}</span>
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <label> Phone Number : </label>
+                                                   <span class="text-large">{{regFrom.phoneNumber}}</span>
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <label> Address 1 : </label>
+                                                   <span class="text-large">{{regFrom.address1}}</span>
+                                                </div>
+                                             </div>
+                                             <div class="row" ng-show="regFrom.address2 != null">
+                                                <div class="col-md-12">
+                                                   <label> Address 2 : </label>
+                                                   <span class="text-large">{{regFrom.address2}}</span>
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <label> City : </label>
+                                                   <span class="text-large">{{regFrom.city}}</span>
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <label> State : </label>
+                                                   <span class="text-large">{{selectedStateName}}</span>
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <label> Zip Code : </label>
+                                                   <span class="text-large">{{regFrom.zipCode}}</span>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <label> Business Category : </label>
+                                                   <span class="text-large">{{selectedBusinessCategory}}</span>
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <label> Name On Card : </label>
+                                                   <span class="text-large">{{regFrom.nameOnCard}}</span>
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <label> Card Number : </label>
+                                                   <span class="text-large">{{regFrom.cardNo}}</span>
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <label> Card Expiration Month : </label>
+                                                   <span class="text-large">{{selectedCardMonth}}</span>
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <label> Card Expiration Year : </label>
+                                                   <span class="text-large">{{selectedCardYear}}</span>
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <label> Billing Address 1 : </label>
+                                                   <span class="text-large">{{regFrom.bAddress1}}</span>
+                                                </div>
+                                             </div>
+                                             <div class="row" ng-show="regFrom.bAddress2 != null">
+                                                <div class="col-md-12">
+                                                   <label> Billing Address 2 : </label>
+                                                   <span class="text-large">{{regFrom.bAddress2}}</span>
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <label> Billing City : </label>
+                                                   <span class="text-large">{{regFrom.bCity}}</span>
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <label> Billing State : </label>
+                                                   <span class="text-large">{{selectedBillingStateName}}</span>
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <label> Billing Zip Code : </label>
+                                                   <span class="text-large">{{regFrom.bzipCode}}</span>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="col-md-12">
+                                          <a class="btn btn-primary btn-o next-step btn-wide pull-right" href="" ng-click="form.submit(Form)"> Submit </a>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- end: WIZARD STEP 4 -->
+                           </div>
+                           <!--  <pre class="code margin-top-20">{{ regFrom | json }}</pre> -->
+                        </form>
+                        <!-- end: WIZARD FORM -->
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- start: WIZARD DEMO -->
+      <!-- end: REGISTER BOX -->
+   </div>
+</div>
