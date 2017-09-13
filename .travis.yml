@@ -24,4 +24,4 @@ deploy:
   secret_access_key: $AWS_SECRET_ACCESS_KEY
   bucket: "test-deployment-pba"
   skip_cleanup: true
-  local_dir: final
+  local_dir: dist

@@ -1,3 +1,3 @@
 module.exports = {
-  production: ['dist/*']
+  production: ['build/*']
 };

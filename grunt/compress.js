@@ -1,10 +1,10 @@
 module.exports = {
 	production: {
 		options: {
-			archive: 'final/pba-client-dist.zip'
+			archive: 'dist/pba-client-dist.zip'
 		},
 		files: [
-		  {src: ['dist/**'], dest: '/'}
+		  {src: ['build/**'], dest: '/'}
 		]
 	}
 };
