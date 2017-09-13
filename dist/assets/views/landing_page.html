@@ -1,0 +1,309 @@
+<!-- start: LANDING PAGE -->
+<div class="landing-page lagre_font">
+    <div id="section-0">
+        <div class="navbar navbar-default" id="landing-header" role="navigation" landing-header>
+            <!-- start: TOP NAVIGATION CONTAINER -->
+            <div class="container">
+                <div class="navbar-header">
+                    <!-- start: RESPONSIVE MENU TOGGLER -->
+                    <a class="landing-menu-toggler btn btn-yellow hidden-sm hidden-md hidden-lg mobile-button" id="landing-menu-toggler" ng-click="landingNavbarCollapsed = !landingNavbarCollapsed">
+                        <span class="sr-only">Toggle navigation</span> <i class="fa fa-bars"></i>
+                    </a>
+                    <!-- end: RESPONSIVE MENU TOGGLER -->
+                    <!-- start: LOGO -->
+                    <a href="index.html" class="navbar-brand">
+                        <img src="assets/images/logo.png" alt="Clip-Two">
+                    </a>
+                    <!-- end: LOGO -->
+                </div>
+                <div class="navbar-collapse collapse" uib-collapse="landingNavbarCollapsed" ng-init="landingNavbarCollapsed = true" off-click="landingNavbarCollapsed = true" off-click-if='!landingNavbarCollapsed' off-click-filter="'#landing-menu-toggler'">
+                    <ul class="nav navbar-nav navbar-right" ct-fullheight="window" data-ct-fullheight-exclusion="#landing-header" data-ct-fullheight-if="isSmallDevice">
+                        <li class="active">
+                            <a href="#section-0" du-smooth-scroll du-scrollspy offset="30" ng-click="landingNavbarCollapsed = true">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#section-2" du-smooth-scroll du-scrollspy offset="30" ng-click="landingNavbarCollapsed = true">
+                                About Us
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#section-3" du-smooth-scroll du-scrollspy offset="30" ng-click="landingNavbarCollapsed = true">
+                                App Features
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#section-5" du-smooth-scroll du-scrollspy offset="30" ng-click="landingNavbarCollapsed = true">
+                                Partners
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#section-6" du-smooth-scroll du-scrollspy offset="30" ng-click="landingNavbarCollapsed = true">
+                                Contact
+                            </a>
+                        </li>
+                        <li class="pull-right">
+                            <a ui-sref="app.dashboard">
+                            Login
+                            </a>
+                        </li>
+                        <li>
+                            <a ui-sref="login.registration">
+                            Sign Up
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- start: MENU TOGGLER FOR MOBILE DEVICES -->
+                    <div class="close-handle visible-xs-block menu-toggler" ng-click="landingNavbarCollapsed = true" ng-swipe-up="landingNavbarCollapsed = true">
+                        <div class="arrow-left"></div>
+                        <div class="arrow-right"></div>
+                    </div>
+                    <!-- end: MENU TOGGLER FOR MOBILE DEVICES -->
+                </div>
+            </div>
+            <!-- end: TOP NAVIGATION CONTAINER -->
+        </div>
+        <div class="landing-content dots-left dots-white">
+            <!-- start: CAROUSEL -->
+            <slick dots=true arrows=false infinite=false speed=300 autoplay=true autoplay-speed=6000 slides-to-show=1 slides-to-scroll=1 class="carousel">
+                <div class="slide" style="background: url('assets/images/carousel/01.png')">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12" align="center">
+                                <div class="image">
+                                    <img src="assets/images/logo-big.png" class="img-responsive inline-block" alt="" />
+                                </div>
+                                <div class="caption">
+                                    <h1 class="text-white">
+                                        Your Life, Your Choice
+                                    </h1>
+                                    <h3 class="text-white">
+                                        Now you can finally eliminate the noise <a href="#section-1" du-smooth-scroll du-scrollspy offset="30" ng-click="landingNavbarCollapsed = true" class="btn btn-wide btn-lg btn-yellow">[ SEE HOW ]</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide" style="background: url('assets/images/carousel/02.png')">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12" align="center">
+                                <div class="image">
+                                    <img src="assets/images/logo-big.png" class="img-responsive inline-block" alt="" />
+                                </div>
+                                <div class="caption">
+                                    <h1 class="text-white">
+                                        Target Who Matters
+                                    </h1>
+                                    <h3 class="text-white">
+                                        Now you can finally eliminate the noise <a href="#section-5" du-smooth-scroll du-scrollspy offset="30" ng-click="landingNavbarCollapsed = true" class="btn btn-wide btn-lg btn-yellow">[ SEE HOW ]</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide" style="background: url('assets/images/carousel/03.png')">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12" align="center">
+                                <div class="image">
+                                    <img src="assets/images/logo-big.png" class="img-responsive inline-block" alt="" />
+                                </div>
+                                <div class="caption">
+                                    <h1 class="text-white">
+                                        Recommendations
+                                    </h1>
+                                    <h3 class="text-white">
+                                        Help Us, Help You <a href="#section-6" du-smooth-scroll du-scrollspy offset="30" ng-click="landingNavbarCollapsed = true" class="btn btn-wide btn-lg btn-yellow">[ LET US KNOW ]</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </slick>
+            <!-- end: CAROUSEL -->
+        </div>
+    </div>
+    <!-- start: SECTION 1 -->
+    <div id="section-1">
+        <section class="container-fluid container-fullw padding-bottom-30 bg-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <img ng-src="assets/images/life_choice.png" alt="" class="full-section-img img-responsive" style="margin-top:0px;"/>
+                        <div class="pages_logo">
+                            <img ng-src="assets/images/logo-medium.png" alt="" class="img-responsive"/>
+                        </div>
+                        <div class="pages_socialmedia">
+                            <a href="#section-0" du-smooth-scroll du-scrollspy offset="30" ng-click="landingNavbarCollapsed = true"><img ng-src="assets/images/app-store-en@2x.png" alt="" border="0" class="img-responsive"/></a>
+                        </div>
+                    </div>
+                    <div class="col-sm-offset-1 col-sm-6">
+                        <h2 class="margin-top-30 large_title">Your Life, Your Choice</h2>
+                        <p style="text-align:justify">
+                            With Spectrum, we want to give you back your freedom. We want you to be able to pick the type of deals and events that interest you. We promise that's all you'll see, exactly what you want.
+                        </p>
+                        <p style="text-align:justify">
+                            We believe in actionable deals. We want you to see something exciting and be able to act on it quickly. With this as one of our core beliefs, we want to give you control over how far you see. You pick the range from your current location.
+                        </p>
+                        <p style="text-align:justify">
+                            There are no hidden fees, no transactions, nothing.Explore your community and take advantage of great opportunities that match your interests.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- end: SECTION 1 -->
+    <!-- start: SECTION 2 -->
+    <div id="section-2">
+        <section class="container-fluid container-fullw padding-bottom-30 bg-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <img ng-src="assets/images/about.png" alt="" class="full-section-img img-responsive">
+                        <div class="pages_logo">
+                            <img ng-src="assets/images/logo-medium.png" alt="" class="img-responsive"/>
+                        </div>
+                        <div class="pages_socialmedia">
+                            <a href="#section-0" du-smooth-scroll du-scrollspy offset="30" ng-click="landingNavbarCollapsed = true"><img ng-src="assets/images/app-store-en@2x.png" alt="" border="0" class="img-responsive"/></a>
+                        </div>
+                    </div>
+                    <div class="col-sm-offset-1 col-sm-6">
+                        <h2 class="large_title">About Us</h2>
+                        <p style="text-align:justify">
+                            We want to build a world where businesses can reach out to the customers that want to hear from them, and where customers don't have to sift through the information they don't care about. In our connected world, someone is constantly trying to get our attention, and we're tired of that.
+                        </p>
+                        <p style="text-align:justify">
+                            A spectrum is something that can be classified on a scale, and we think that fits just about everyone.With Spectrum you're able to pick what interests you, and we promise that is all you will see.
+                        </p>
+                        <p style="text-align:justify">
+                            Spectrum is here for the people who want to focus on their life. We want you to spend your time living, not sifting through notifications.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- end: SECTION 2 -->
+    <!-- start: SECTION 3 -->
+    <div id="section-3">
+        <section class="container-fluid container-fullw padding-bottom-30 bg-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <img ng-src="assets/images/app_1.png" alt="" class="full-section-img img-responsive" style="margin-top:0px;"/>
+                    </div>
+                    <div class="col-sm-3">
+                        <p style="text-align:justify">
+                            <b>Your life, your choices:</b> When you first open our app you will be able to refine your interests. Be as detailed as you would like. As you interact with the choices presented to you, the software will continue to refine your choices for you.
+                        </p>
+                    </div>
+                    <div class="col-sm-3 padding-top-30">
+                        <img ng-src="assets/images/app_2.png" alt="" class="full-section-img img-responsive"/>
+                      </div>
+                    <div class="col-sm-3">
+                        <p style="text-align:justify">
+                            <b>Focus on fun, we take care of the rest:</b> With Spectrum, you don't have to do anything outside of the application. There is no code to give anyone at the restaurant or store. There is nothing to scan. You do not have to check in. Just enjoy your time 
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- end: SECTION 3 -->
+    <!-- start: SECTION 4 -->
+    <div id="section-4">
+        <section class="container-fluid container-fullw padding-bottom-30 bg-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <img ng-src="assets/images/app_3.png" alt="" class="full-section-img img-responsive" style="margin-top:0px;"/>
+                    </div>
+                    <div class="col-sm-3">
+                        <p style="text-align:justify">
+                            <b>Actionable options:</b> We want you to see promotions you can take advantage of. As a result, you will only see promotions that fall within the range you select.
+                        </p>
+                    </div>
+                    <div class="col-sm-3">
+                        <img ng-src="assets/images/app_4.png" alt="" class="full-section-img img-responsive"/>
+                    </div>
+                    <div class="col-sm-3">
+                        <p style="text-align:justify">
+                            <b>Your secret is safe with us:</b> Your identity is your business, not ours. We promise to not share any of your personal information. You will not be stuck on a call list or receive spam because of us. We promise.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- end: SECTION 4 -->
+    <!-- start: SECTION 5 -->
+    <div id="section-5">
+        <section class="container-fluid container-fullw padding-bottom-30 bg-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <img ng-src="assets/images/target.png" alt="" class="full-section-img img-responsive" style="margin-top:0px;"/>
+                        <div class="pages_logo">
+                            <img ng-src="assets/images/logo-medium.png" alt="" class="img-responsive"/>
+                        </div>
+                        <div class="pages_socialmedia">
+                            <a href="#section-0" du-smooth-scroll du-scrollspy offset="30" ng-click="landingNavbarCollapsed = true"><img ng-src="assets/images/app-store-en@2x.png" alt="" border="0" class="img-responsive"/></a>
+                        </div>
+                    </div>
+                    <div class="col-sm-offset-1 col-sm-6">
+                        <h2 class="large_title">Target Who Matters</h2>
+                        <p style="text-align:justify">
+                            We want you to be able to target YOUR customer directly. With Spectrum's preference list, you have keywords available to you that match a user's options. What you choose dictates who sees it.
+                        </p>
+                        <p style="text-align:justify">
+                            We want your money to work smarter for you with Spectrum.With us, you only pay to reach the people who want to hear from you.
+                        </p>
+                        <p style="text-align:justify">
+                            With Spectrum, every promotion you run will be accompanied by detailed analytics. You'll be to see how effective your promotion was and build a better understanding of your customers.
+                        </p>
+                        <p><a href="#section-0" du-smooth-scroll du-scrollspy offset="30" ng-click="landingNavbarCollapsed = true" class="btn btn-wide btn-lg btn-yellow">[ ANALYTICS EXAMPLES ]</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- end: SECTION 5 -->
+    <!-- start: SECTION 6 -->
+    <div id="section-6">
+        <section class="container-fluid container-fullw padding-bottom-30 bg-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <img ng-src="assets/images/rec.png" alt="" class="full-section-img img-responsive" style="margin-top:0px;"/>
+                        <div class="pages_logo">
+                            <img ng-src="assets/images/logo-medium.png" alt="" class="img-responsive"/>
+                        </div>
+                        <div class="pages_socialmedia">
+                            <a href="#section-0" du-smooth-scroll du-scrollspy offset="30" ng-click="landingNavbarCollapsed = true"><img ng-src="assets/images/app-store-en@2x.png" alt="" border="0" class="img-responsive"/></a>
+                        </div>
+                    </div>
+                    <div class="col-sm-offset-1 col-sm-6">
+                        <h2 class="large_title">Recommendations</h2>
+                        <p style="text-align:justify">
+                            We want to be everywhere you want us and we need your help. If there's a store or restaurant that you love, then tell us about it. Please fill out the form and we'll reach out to them:
+                        </p>
+                        <p><a ui-sref="landing.recommendation" du-smooth-scroll du-scrollspy offset="30" class="btn btn-wide btn-lg btn-yellow">[ RECOMMENDATION ]</a></p>
+                        <h2 class="large_title">Technical Support</h2>
+                        <p style="text-align:justify">
+                            Are you having trouble with the Spectrum App? Please fill out the form and our help desk will be in touch:
+                        </p>
+                        <p><a ui-sref="landing.support" du-smooth-scroll du-scrollspy offset="30" class="btn btn-wide btn-lg btn-yellow">[ SUPPORT ]</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- end: SECTION 6 -->
+</div>
+<!-- end: LANDING PAGE -->

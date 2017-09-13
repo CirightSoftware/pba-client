@@ -1,0 +1,553 @@
+<!-- start: BREADCRUMB -->
+<div class="breadcrumb-wrapper">
+    <h4 class="mainTitle no-margin" translate="sidebar.nav.pages.USERPROFILE">USER PROFILE</h4>
+
+    <div ncy-breadcrumb class="pull-right"></div>
+</div>
+<!-- end: BREADCRUMB -->
+<!-- start: USER PROFILE -->
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <!-- start: USER TABSET -->
+                <uib-tabset class="tabbable">
+                    <!-- start: TAB EDIT ACCOUNT -->
+                    <uib-tab heading="Business Details" active="editActive">
+                        <div ng-controller="ManufacturerCtrl">
+                            <form name="ManuForm" id="manuform" novalidate method="POST" ng-submit="saveManufacturerDetails(ManuForm)">
+                                <fieldset>
+                                    <legend>
+                                        Merchant Info
+                                    </legend>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group" ng-class="{'has-error':ManuForm.fname.$dirty && ManuForm.fname.$invalid, 'has-success':ManuForm.fname.$valid}">
+                                                       <label> Name <span class="symbol required"></span> </label>
+                                                       <input type="text" placeholder="Enter your Name" class="form-control" name="fname" ng-model="editManForm.fname" required="true" />
+                                                       <span class="error text-small block" ng-if="ManuForm.fname.$dirty && ManuForm.fname.$invalid">Name is required.</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group" ng-class="{'has-error':ManuForm.pnumber.$dirty && ManuForm.pnumber.$invalid, 'has-success':ManuForm.pnumber.$valid}">
+                                                       <label class="control-label"> Phone Number <span class="symbol required"></span> </label>
+                                                       <input type="text" class="form-control" name="pnumber" ng-model="editManForm.pnumber" ui-mask="999 999 9999" required="true"/>
+                                                       <span class="error text-small block" ng-if="ManuForm.pnumber.$dirty && ManuForm.pnumber.$invalid">Phone Number is required.</span>
+                                                       <span class="error text-small block" ng-if="ManuForm.pnumber.$error.pnumber">Please, enter a valid phone number.</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group" ng-class="{'has-error':ManuForm.website.$dirty && ManuForm.website.$invalid, 'has-success':ManuForm.website.$valid}">
+                                                       <label> Website <span class="symbol required"></span> </label>
+                                                       <input type="text" placeholder="Enter Website" class="form-control" name="website" ng-model="editManForm.website" required="true" />
+                                                       <span class="error text-small block" ng-if="ManuForm.website.$dirty && ManuForm.website.$invalid">Web Site is required.</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group" ng-class="{'has-error':ManuForm.zip.$dirty && ManuForm.zip.$invalid, 'has-success':ManuForm.zip.$valid}">
+                                                       <label> Zip <span class="symbol required"></span> </label>
+                                                       <input type="text" placeholder="Enter Zip code" class="form-control" name="zip" ng-model="editManForm.zip" required="true" />
+                                                       <span class="error text-small block" ng-if="ManuForm.zip.$dirty && ManuForm.zip.$invalid">Zip code is required.</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                              <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>
+                                                            Image Upload
+                                                        </label>
+                                                        <div flow-init flow-name="obj.flow" 
+                                                                flow-files-added="processFiles($files)">
+                                                            <div class="user-image">
+                                                                <div class="thumbnail margin-bottom-5">
+                                                                    <img src="assets/images/default-user.png" style="max-width: 100%;" alt="" ng-if="!obj.flow.files.length && noImage" width="300">
+                                                                    <img ng-src="{{editManForm.promotionalImage}}" style="max-width: 100%;" alt="" ng-if="!obj.flow.files.length && !noImage" width="200">
+                                                                    <img flow-img="obj.flow.files[0]" style="max-width: 100%;" ng-if="obj.flow.files.length" width="300">
+                                                                </div>
+                                                            </div>
+                                                            <div class="user-image-buttons-edit" ng-if="obj.flow.files.length">
+                                                                <span class="btn btn-primary btn-file">
+                                                                    <i class="fa fa-pencil"></i>
+                                                                    <input type="file" flow-btn ng-model="editManForm.promotionalImageBase64" />
+                                                                </span>
+                                                                <span class="btn btn-danger" ng-click="obj.flow.cancel()"> <i class="fa fa-times"></i></span>
+                                                            </div>
+                                                            <div class="user-image-buttons-edit" ng-if="!obj.flow.files.length">
+                                                                <span class="btn btn-primary btn-file">
+                                                                    <i class="fa fa-pencil"></i>
+                                                                    <input type="file" flow-btn />
+                                                                </span>
+                                                                <span class="btn btn-danger" ng-if="!noImage" ng-click="removeImage()"><i class="fa fa-times"></i> </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group" ng-class="{'has-error':ManuForm.address1.$dirty && ManuForm.address1.$invalid, 'has-success':ManuForm.address1.$valid}">
+                                                       <label> Address1 <span class="symbol required"></span> </label>
+                                                       <input type="text" placeholder="Enter Address1" class="form-control" name="address1" ng-model="editManForm.address1" required="true" />
+                                                       <span class="error text-small block" ng-if="ManuForm.address1.$dirty && ManuForm.address1.$invalid">Address 1 is required.</span>
+                                                    </div>
+                                                 </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                       <label> Address2 </label>
+                                                       <input type="text" placeholder="Enter Address2" class="form-control" name="address2" ng-model="editManForm.address2" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group" ng-class="{'has-error':ManuForm.city.$dirty && ManuForm.city.$invalid, 'has-success':ManuForm.city.$valid}">
+                                                       <label> City <span class="symbol required"></span> </label>
+                                                       <input type="text" placeholder="Enter City" class="form-control" name="city" ng-model="editManForm.city" required="true" />
+                                                       <span class="error text-small block" ng-if="ManuForm.city.$dirty && ManuForm.city.$invalid">City is required.</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group" ng-class="{'has-error':ManuForm.state.$dirty && ManuForm.state.$invalid, 'has-success':ManuForm.state.$valid}">
+                                                       <label> State <span class="symbol required"></span> </label>
+                                                       <span class="clip-select">
+                                                          <select class="form-control" name="state" id="state" ng-model="editManForm.state" required="true">
+                                                             <option value="-1">Select State</option>
+                                                             <option ng-repeat="stateOption in stateData" value="{{stateOption.stateId}}">{{stateOption.stateName}}</option>
+                                                          </select>
+                                                          <span class="error text-small block" ng-if="ManuForm.state.$dirty && ManuForm.state.$invalid">State is Required.</span>
+                                                       </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-yellow btn-wide pull-right"> Save </button>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </uib-tab>
+                    <!-- end: TAB EDIT ACCOUNT -->
+                    <!-- start: TAB Business Hours-->
+                    <uib-tab heading="Business Hours">
+                        <div ng-controller="OfficeCtrl">
+                            <form name="OfficeForm" id="officeform" novalidate method="POST" ng-submit="saveOfficeDetails(OfficeForm)">
+                                <fieldset>
+                                    <legend>
+                                        Office Info
+                                    </legend>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                   <div class="form-group">
+                                                      <div class="col-md-2">
+                                                         <input type="checkbox" ng-model="editOfficeForm.chkOpentime1" name="chkOpentime1" id="chkOpentime1" ng-true-value="1" ng-false-value="0" style="vertical-align: -40px;"/> <label class="control-label" style="vertical-align: -40px;"> Sun</label>
+                                                      </div>
+                                                      <div class="col-md-8">
+                                                         <div class="col-md-5">
+                                                            <uib-timepicker ng-model="editOfficeForm.openTime1" id="openTime1" name="openTime1" ng-disabled="editOfficeForm.chkOpentime1 == 0" ng-required="editOfficeForm.chkOpentime1 == 1" hour-step="1" minute-step="1" show-meridian="true"></uib-timepicker>
+                                                         </div>
+                                                         <div class="col-md-2">
+                                                            <label class="control-label" style="vertical-align: -40px;">to</label>
+                                                         </div>
+                                                         <div class="col-md-5">
+                                                            <uib-timepicker ng-model="editOfficeForm.closeTime1" id="closeTime1" name="closeTime1" ng-disabled="editOfficeForm.chkOpentime1 == 0" ng-required="editOfficeForm.chkOpentime1 == 1" hour-step="1" minute-step="1" show-meridian="true"></uib-timepicker>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                   <div class="form-group">
+                                                      <div class="col-md-2">
+                                                         <input type="checkbox" ng-model="editOfficeForm.chkOpentime2" name="chkOpentime2" id="chkOpentime2" ng-true-value="1" ng-false-value="0" style="vertical-align: -40px;"/> <label class="control-label" style="vertical-align: -40px;"> Mon</label>
+                                                      </div>
+                                                      <div class="col-md-8">
+                                                         <div class="col-md-5">
+                                                            <uib-timepicker ng-model="editOfficeForm.openTime2" id="openTime2" name="openTime2" ng-disabled="editOfficeForm.chkOpentime2 == 0" ng-required="editOfficeForm.chkOpentime2 == 1" hour-step="1" minute-step="1" show-meridian="true"></uib-timepicker>
+                                                         </div>
+                                                         <div class="col-md-2">
+                                                            <label class="control-label" style="vertical-align: -40px;">to</label>
+                                                         </div>
+                                                         <div class="col-md-5">
+                                                            <uib-timepicker ng-model="editOfficeForm.closeTime2" id="closeTime2" name="closeTime2" ng-disabled="editOfficeForm.chkOpentime2 == 0" ng-required="editOfficeForm.chkOpentime2 == 1" hour-step="1" minute-step="1" show-meridian="true"></uib-timepicker>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                   <div class="form-group">
+                                                      <div class="col-md-2">
+                                                         <input type="checkbox" ng-model="editOfficeForm.chkOpentime3" name="chkOpentime3" id="chkOpentime3" ng-true-value="1" ng-false-value="0" style="vertical-align: -40px;"/> <label class="control-label" style="vertical-align: -40px;"> Tue</label>
+                                                      </div>
+                                                      <div class="col-md-8">
+                                                         <div class="col-md-5">
+                                                            <uib-timepicker ng-model="editOfficeForm.openTime3" id="openTime3" name="openTime3" ng-disabled="editOfficeForm.chkOpentime3 == 0" ng-required="editOfficeForm.chkOpentime3 == 1" hour-step="1" minute-step="1" show-meridian="true"></uib-timepicker>
+                                                         </div>
+                                                         <div class="col-md-2">
+                                                            <label class="control-label" style="vertical-align: -40px;">to</label>
+                                                         </div>
+                                                         <div class="col-md-5">
+                                                            <uib-timepicker ng-model="editOfficeForm.closeTime3" id="closeTime3" name="closeTime3" ng-disabled="editOfficeForm.chkOpentime3 == 0" ng-required="editOfficeForm.chkOpentime3 == 1" hour-step="1" minute-step="1" show-meridian="true"></uib-timepicker>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                   <div class="form-group">
+                                                      <div class="col-md-2">
+                                                         <input type="checkbox" ng-model="editOfficeForm.chkOpentime4" name="chkOpentime4" id="chkOpentime4" ng-true-value="1" ng-false-value="0" style="vertical-align: -40px;"/> <label class="control-label" style="vertical-align: -40px;"> Wed</label>
+                                                      </div>
+                                                      <div class="col-md-8">
+                                                         <div class="col-md-5">
+                                                            <uib-timepicker ng-model="editOfficeForm.openTime4" id="openTime4" name="openTime4" ng-disabled="editOfficeForm.chkOpentime4 == 0" ng-required="editOfficeForm.chkOpentime4 == 1" hour-step="1" minute-step="1" show-meridian="true"></uib-timepicker>
+                                                         </div>
+                                                         <div class="col-md-2">
+                                                            <label class="control-label" style="vertical-align: -40px;">to</label>
+                                                         </div>
+                                                         <div class="col-md-5">
+                                                            <uib-timepicker ng-model="editOfficeForm.closeTime4" id="closeTime4" name="closeTime4" ng-disabled="editOfficeForm.chkOpentime4 == 0" ng-required="editOfficeForm.chkOpentime4 == 1" hour-step="1" minute-step="1" show-meridian="true"></uib-timepicker>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                   <div class="form-group">
+                                                      <div class="col-md-2">
+                                                         <input type="checkbox" ng-model="editOfficeForm.chkOpentime5" name="chkOpentime5" id="chkOpentime5" ng-true-value="1" ng-false-value="0" style="vertical-align: -40px;"/> <label class="control-label" style="vertical-align: -40px;"> Thu</label>
+                                                      </div>
+                                                      <div class="col-md-8">
+                                                         <div class="col-md-5">
+                                                            <uib-timepicker ng-model="editOfficeForm.openTime5" id="openTime5" name="openTime5" ng-disabled="editOfficeForm.chkOpentime5 == 0" ng-required="editOfficeForm.chkOpentime5 == 1" hour-step="1" minute-step="1" show-meridian="true"></uib-timepicker>
+                                                         </div>
+                                                         <div class="col-md-2">
+                                                            <label class="control-label" style="vertical-align: -40px;">to</label>
+                                                         </div>
+                                                         <div class="col-md-5">
+                                                            <uib-timepicker ng-model="editOfficeForm.closeTime5" id="closeTime5" name="closeTime5" ng-disabled="editOfficeForm.chkOpentime5 == 0" ng-required="editOfficeForm.chkOpentime5 == 1" hour-step="1" minute-step="1" show-meridian="true"></uib-timepicker>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                   <div class="form-group">
+                                                      <div class="col-md-2">
+                                                         <input type="checkbox" ng-model="editOfficeForm.chkOpentime6" name="chkOpentime6" id="chkOpentime6" ng-true-value="1" ng-false-value="0" style="vertical-align: -40px;"/> <label class="control-label" style="vertical-align: -40px;"> Fri</label>
+                                                      </div>
+                                                      <div class="col-md-8">
+                                                         <div class="col-md-5">
+                                                            <uib-timepicker ng-model="editOfficeForm.openTime6" id="openTime6" name="openTime6" ng-disabled="editOfficeForm.chkOpentime6 == 0" ng-required="editOfficeForm.chkOpentime6 == 1" hour-step="1" minute-step="1" show-meridian="true"></uib-timepicker>
+                                                         </div>
+                                                         <div class="col-md-2">
+                                                            <label class="control-label" style="vertical-align: -40px;">to</label>
+                                                         </div>
+                                                         <div class="col-md-5">
+                                                            <uib-timepicker ng-model="editOfficeForm.closeTime6" id="closeTime6" name="closeTime6" ng-disabled="editOfficeForm.chkOpentime6 == 0" ng-required="editOfficeForm.chkOpentime6 == 1" hour-step="1" minute-step="1" show-meridian="true"></uib-timepicker>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                   <div class="form-group">
+                                                      <div class="col-md-2">
+                                                         <input type="checkbox" ng-model="editOfficeForm.chkOpentime7" name="chkOpentime7" id="chkOpentime7" ng-true-value="1" ng-false-value="0" style="vertical-align: -40px;"/> <label class="control-label" style="vertical-align: -40px;"> Sat</label>
+                                                      </div>
+                                                      <div class="col-md-8">
+                                                         <div class="col-md-5">
+                                                            <uib-timepicker ng-model="editOfficeForm.openTime7" id="openTime7" name="openTime7" ng-disabled="editOfficeForm.chkOpentime7 == 0" ng-required="editOfficeForm.chkOpentime7 == 1" hour-step="1" minute-step="1" show-meridian="true"></uib-timepicker>
+                                                         </div>
+                                                         <div class="col-md-2">
+                                                            <label class="control-label" style="vertical-align: -40px;">to</label>
+                                                         </div>
+                                                         <div class="col-md-5">
+                                                            <uib-timepicker ng-model="editOfficeForm.closeTime7" id="closeTime7" name="closeTime7" ng-disabled="editOfficeForm.chkOpentime7 == 0" ng-required="editOfficeForm.chkOpentime7 == 1" hour-step="1" minute-step="1" show-meridian="true"></uib-timepicker>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-yellow btn-wide pull-right"> Save </button>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </uib-tab>
+                    <!-- end: TAB Business Hours -->
+                    <!-- start: TAB Billing Details-->
+                    <uib-tab heading="Billing Details">
+                        <div ng-controller="CardCtrl">
+                            <form name="CardForm" id="cardform" novalidate method="POST">
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <fieldset>
+                                             <legend>
+                                                Card Details
+                                             </legend>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <div class="form-group" ng-class="{'has-error':CardForm.nameOnCard.$dirty && CardForm.nameOnCard.$invalid, 'has-success':CardForm.nameOnCard.$valid}">
+                                                      <label> Name On Card <span class="symbol required"></span> </label>
+                                                      <input type="text" placeholder="Enter Name on card" class="form-control" name="nameOnCard" ng-model="editCardForm.nameOnCard" required="true" />
+                                                      <span class="error text-small block" ng-if="CardForm.nameOnCard.$dirty && CardForm.nameOnCard.$invalid">Name On card is required.</span>
+                                                   </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                   <div class="form-group" ng-class="{'has-error':CardForm.cardNum.$dirty && CardForm.cardNum.$invalid, 'has-success':CardForm.cardNum.$valid}">
+                                                      <label> Card Number <span class="symbol required"></span> </label>
+                                                      <input type="text" ui-mask="9999 9999 9999 9999" class="form-control" name="cardNum" ng-model="editCardForm.cardNum" required="true" />
+                                                      <span class="error text-small block" ng-if="CardForm.cardNum.$dirty && CardForm.cardNum.$invalid">Card number is required.</span>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                            <label> Expires <span class="symbol required"></span> </label>
+                                            <div class="row">
+                                                <div class="col-md-4 col-sm-6">
+                                                   <div class="form-group" ng-class="{'has-error':CardForm.cardMonth.$dirty && CardForm.cardMonth.$invalid, 'has-success':CardForm.cardMonth.$valid}">
+                                                      <label> Month <span class="symbol required"></span> </label>
+                                                      <span class="clip-select">
+                                                        <select class="form-control" name="cardMonth" id="cardMonth" ng-model="editCardForm.cardMonth" required="true">
+                                                            <option value="" disabled>Month</option>
+                                                            <option value="1">Jan</option>
+                                                            <option value="2">Feb</option>
+                                                            <option value="3">Mar</option>
+                                                            <option value="4">Apr</option>
+                                                            <option value="5">May</option>
+                                                            <option value="6">Jun</option>
+                                                            <option value="7">Jul</option>
+                                                            <option value="8">Aug</option>
+                                                            <option value="9">Sep</option>
+                                                            <option value="10">Oct</option>
+                                                            <option value="11">Nov</option>
+                                                            <option value="12">Dec</option>
+                                                        </select>
+                                                        <span class="error text-small block" ng-if="CardForm.cardMonth.$dirty && CardForm.cardMonth.$invalid">Month is Required.</span>
+                                                      </span>
+                                                   </div>
+                                                </div>
+                                                <div class="col-md-4 col-sm-6">
+                                                   <div class="form-group" ng-class="{'has-error':CardForm.cardYear.$dirty && CardForm.cardYear.$invalid, 'has-success':CardForm.cardYear.$valid}">
+                                                      <label> Year <span class="symbol required"></span> </label>
+                                                      <span class="clip-select">
+                                                        <select class="form-control" name="cardYear" id="cardYear" ng-model="editCardForm.cardYear" required="true">
+                                                            <option value="" disabled>Year</option>
+                                                            <option value="2016">2016</option>
+                                                            <option value="2017">2017</option>
+                                                            <option value="2018">2018</option>
+                                                            <option value="2019">2019</option>
+                                                            <option value="2020">2020</option>
+                                                            <option value="2021">2021</option>
+                                                            <option value="2022">2022</option>
+                                                            <option value="2023">2023</option>
+                                                            <option value="2024">2024</option>
+                                                            <option value="2025">2025</option>
+                                                            <option value="2026">2026</option>
+                                                            <option value="2027">2027</option>
+                                                        </select>
+                                                        <span class="error text-small block" ng-if="CardForm.cardYear.$dirty && CardForm.cardYear.$invalid">Month is Required.</span>
+                                                      </span>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </fieldset>
+                                       </div>
+                                       <div class="col-md-6">
+                                          <fieldset>
+                                             <legend>
+                                                Billing Address
+                                             </legend>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <div class="form-group" ng-class="{'has-error':CardForm.billingAddress.$dirty && CardForm.billingAddress.$invalid, 'has-success':CardForm.billingAddress.$valid}">
+                                                      <label> Address1 <span class="symbol required"></span> </label>
+                                                      <input type="text" placeholder="Enter Address1" class="form-control" name="billingAddress" ng-model="editAddressForm.billingAddress"  required="true"/>
+                                                      <span class="error text-small block" ng-if="CardForm.billingAddress.$dirty && CardForm.billingAddress.$invalid">Billing address is required.</span>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <div class="form-group">
+                                                      <label> Address2 </label>
+                                                      <input type="text" placeholder="Enter Address2" class="form-control" name="billingAddress2" ng-model="editAddressForm.billingAddress2" />
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <div class="form-group" ng-class="{'has-error':CardForm.cardState.$dirty && CardForm.cardState.$invalid, 'has-success':CardForm.cardState.$valid}">
+                                                      <label> State <span class="symbol required"></span> </label>
+                                                      <span class="clip-select">
+                                                         <select class="form-control" name="cardState" id="cardState" ng-model="editAddressForm.cardState"  required="true">
+                                                            <option value="-1">Select State</option>
+                                                            <option ng-repeat="stateOption in stateData" value="{{stateOption.stateId}}">{{stateOption.stateName}}</option>
+                                                         </select>
+                                                         <span class="error text-small block" ng-if="CardForm.cardState.$dirty && CardForm.cardState.$invalid">State is Required.</span>
+                                                      </span>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <div class="form-group" ng-class="{'has-error':CardForm.cardCity.$dirty && CardForm.cardCity.$invalid, 'has-success':CardForm.cardCity.$valid}">
+                                                      <label> City <span class="symbol required"></span> </label>
+                                                      <input type="text" placeholder="Enter City" class="form-control" name="cardCity" ng-model="editAddressForm.cardCity"  required="true"/>
+                                                      <span class="error text-small block" ng-if="CardForm.cardCity.$dirty && CardForm.cardCity.$invalid">City is required.</span>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <div class="row">
+                                                <div class="col-md-12">
+                                                   <div class="form-group" ng-class="{'has-error':CardForm.cardZip.$dirty && CardForm.cardZip.$invalid, 'has-success':CardForm.cardZip.$valid}">
+                                                      <label> Zip <span class="symbol required"></span> </label>
+                                                      <input type="text" placeholder="Enter Zip code" class="form-control" name="cardZip" ng-model="editAddressForm.cardZip"   required="true" />
+                                                      <span class="error text-small block" ng-if="CardForm.cardZip.$dirty && CardForm.cardZip.$invalid">Zip code is required.</span>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </fieldset>
+                                       </div>
+                                        <!-- <div class="col-md-4" ng-repeat="cardOption in cardData">
+                                             <table class="table table-condensed">
+                                                <thead>
+                                                    <tr>
+                                                        <th colspan="3">Card Information</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Name On Card</td>
+                                                        <td>
+                                                            {{cardOption.nameOnCard}}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Card Number</td>
+                                                        <td>
+                                                            {{cardOption.cardNum}}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Card Expires On</td>
+                                                        <td>
+                                                            {{cardOption.cardMonth}}/{{cardOption.cardYear}}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="row">
+                                                <div class="form-group">
+                                                    <button class="btn btn-primary btn-o next-step btn-wide pull-right" ng-click="showCardEditForm(cardOption.manufacturerCardId)"> Edit </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8" ng-show="cardFormFlag == 1">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                   <div class="form-group" ng-class="{'has-error':CardForm.nameOnCard.$dirty && CardForm.nameOnCard.$invalid, 'has-success':CardForm.nameOnCard.$valid}">
+                                                      <label> Name On Card <span class="symbol required"></span> </label>
+                                                      <input type="text" placeholder="Enter Name on card" class="form-control" name="nameOnCard" ng-model="editCardForm.nameOnCard" required="true" />
+                                                      <span class="error text-small block" ng-if="CardForm.nameOnCard.$dirty && CardForm.nameOnCard.$invalid">Name On card is required.</span>
+                                                   </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                   <div class="form-group" ng-class="{'has-error':CardForm.cardNum.$dirty && CardForm.cardNum.$invalid, 'has-success':CardForm.cardNum.$valid}">
+                                                      <label> Card Number <span class="symbol required"></span> </label>
+                                                      <input type="text" ui-mask="9999 9999 9999 9999" class="form-control" name="cardNum" ng-model="editCardForm.cardNum" required="true" />
+                                                      <span class="error text-small block" ng-if="CardForm.cardNum.$dirty && CardForm.cardNum.$invalid">Card number is required.</span>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                            <label> Expires <span class="symbol required"></span> </label>
+                                            <div class="row">
+                                                <div class="col-md-4 col-sm-6">
+                                                   <div class="form-group" ng-class="{'has-error':CardForm.cardMonth.$dirty && CardForm.cardMonth.$invalid, 'has-success':CardForm.cardMonth.$valid}">
+                                                      <label> Month <span class="symbol required"></span> </label>
+                                                      <span class="clip-select">
+                                                        <select class="form-control" name="cardMonth" id="cardMonth" ng-model="editCardForm.cardMonth" required="true">
+                                                            <option value="" disabled>Month</option>
+                                                            <option value="1">Jan</option>
+                                                            <option value="2">Feb</option>
+                                                            <option value="3">Mar</option>
+                                                            <option value="4">Apr</option>
+                                                            <option value="5">May</option>
+                                                            <option value="6">Jun</option>
+                                                            <option value="7">Jul</option>
+                                                            <option value="8">Aug</option>
+                                                            <option value="9">Sep</option>
+                                                            <option value="10">Oct</option>
+                                                            <option value="11">Nov</option>
+                                                            <option value="12">Dec</option>
+                                                        </select>
+                                                        <span class="error text-small block" ng-if="CardForm.cardMonth.$dirty && CardForm.cardMonth.$invalid">Month is Required.</span>
+                                                      </span>
+                                                   </div>
+                                                </div>
+                                                <div class="col-md-4 col-sm-6">
+                                                   <div class="form-group" ng-class="{'has-error':CardForm.cardYear.$dirty && CardForm.cardYear.$invalid, 'has-success':CardForm.cardYear.$valid}">
+                                                      <label> Year <span class="symbol required"></span> </label>
+                                                      <span class="clip-select">
+                                                        <select class="form-control" name="cardYear" id="cardYear" ng-model="editCardForm.cardYear" required="true">
+                                                            <option value="" disabled>Year</option>
+                                                            <option value="2016">2016</option>
+                                                            <option value="2017">2017</option>
+                                                            <option value="2018">2018</option>
+                                                            <option value="2019">2019</option>
+                                                            <option value="2020">2020</option>
+                                                            <option value="2021">2021</option>
+                                                            <option value="2022">2022</option>
+                                                            <option value="2023">2023</option>
+                                                            <option value="2024">2024</option>
+                                                            <option value="2025">2025</option>
+                                                            <option value="2026">2026</option>
+                                                            <option value="2027">2027</option>
+                                                        </select>
+                                                        <span class="error text-small block" ng-if="CardForm.cardYear.$dirty && CardForm.cardYear.$invalid">Month is Required.</span>
+                                                      </span>
+                                                   </div>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                     <button class="btn btn-yellow btn-wide pull-right" ng-click="updateCardDetails(CardForm)"> Save </button>
+                                  </div>
+                            </form>
+                        </div>
+                    </uib-tab>
+                    <!-- end: TAB Billing Details -->
+                </uib-tabset>
+                <!-- end: USER TABSET -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: USER PROFILE -->

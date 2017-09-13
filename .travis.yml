@@ -1,0 +1,27 @@
+sudo: required
+dist: trusty
+
+language: node_js
+node_js:
+  - '4.5'
+
+before_script:
+  - gem install compass
+  - npm install -g grunt-cli
+  - npm install -g bower
+  - echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+  - npm install
+  - bower install -f
+
+script:
+  - grunt build:production
+
+deploy:
+  on:
+    branch: production
+  provider: s3
+  access_key_id: $AWS_ACCESS_KEY_ID
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
+  bucket: "test-deployment-pba"
+  skip_cleanup: true
+  local_dir: final
