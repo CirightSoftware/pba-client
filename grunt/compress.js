@@ -4,7 +4,8 @@ module.exports = {
 			archive: 'dist/pba-client-dist.zip'
 		},
 		files: [
-		  {src: ['build/**'], dest: '/'}
+		  {src: ['build/**'], dest: '/'},
+		  {src: ['bower_components/**'], dest: '/'},
 		]
 	}
 };
