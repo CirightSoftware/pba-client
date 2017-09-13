@@ -1,3 +1,3 @@
 module.exports = {
-  production: ['spectrum/*']
+  production: ['dist/*']
 };

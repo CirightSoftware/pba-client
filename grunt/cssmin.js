@@ -1,7 +1,7 @@
 module.exports = {
   production:{
   	files: {
-        'spectrum/assets/css/app.min.css': ['spectrum/assets/css/app.css']
+        'dist/assets/css/app.min.css': ['dist/assets/css/app.css']
      }
   }
 };

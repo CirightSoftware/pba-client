@@ -1,7 +1,7 @@
 module.exports = {
 	production: {
 		files: {
-			'spectrum/assets/js/app.src.js': [
+			'dist/assets/js/app.src.js': [
 				'bower_components/jquery/dist/jquery.js', 
 				'bower_components/fastclick/lib/fastclick.js', 
 				'bower_components/components-modernizr/modernizr.js',
@@ -52,7 +52,7 @@ module.exports = {
 				'assets/js/filters/*.js', 
 				'assets/js/controllers/mainCtrl.js'
 			],
-			'spectrum/assets/css/app.css': [
+			'dist/assets/css/app.css': [
 				'bower_components/bootstrap/dist/css/bootstrap.css',
 				'bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css',
                 'bower_components/font-awesome/css/font-awesome.css',

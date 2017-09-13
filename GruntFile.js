@@ -9,7 +9,8 @@ module.exports = function(grunt) {
     gtx.config(gruntConfig);
 
     // We need our bower components in order to develop
-	gtx.alias('build:production', ['compass:production', 'clean:production', 'copy:production', 'string-replace:production', 'concat:production', 'cssmin:production', 'uglify:production']);
+	gtx.alias('build:dist', ['compass:production', 'clean:production', 'copy:production', 'string-replace:production', 'concat:production', 'cssmin:production', 'uglify:production']);
+	gtx.alias('build:production', ['compass:production', 'clean:production', 'copy:production', 'string-replace:production', 'concat:production', 'cssmin:production', 'uglify:production', 'compress:production']);
 
     gtx.finalise();
 };

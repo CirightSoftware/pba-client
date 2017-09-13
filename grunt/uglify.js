@@ -1,7 +1,7 @@
 module.exports = {
 	production: {
 		files: {
-			'spectrum/assets/js/app.min.js': 'spectrum/assets/js/app.src.js'
+			'dist/assets/js/app.min.js': 'dist/assets/js/app.src.js'
 		},
 		options: {
 			mangle: false
