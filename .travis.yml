@@ -11,7 +11,6 @@ before_script:
   - npm install -g bower
   - echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
   - npm install
-  - bower install -f
 
 script:
   - grunt build:production
