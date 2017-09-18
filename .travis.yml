@@ -8,7 +8,6 @@ node_js:
 before_script:
   - gem install compass
   - npm install -g grunt-cli
-  - npm install -g bower
   - echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
   - npm install
 
