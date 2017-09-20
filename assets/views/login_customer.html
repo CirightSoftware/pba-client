@@ -22,6 +22,9 @@
                            <p class="margin-bottom-10">
                               {{notificationMessage}}
                            </p>
+                           <p>
+                             <a ui-sref="#" class="btn btn-success" ng-click="goToLogIn()"> Go to LogIn </a>
+                           </p>
                         </div>
                         <form name="Form" id="form1" novalidate method="POST" ng-show="submited == 0">
                             <div class="row">
@@ -41,10 +44,9 @@
                                           </div>
                                           <div class="row">
                                              <div class="col-md-12">
-                                                   <div class="form-group" ng-class="{'has-error':Form.website.$dirty && Form.website.$invalid, 'has-success':Form.website.$valid}">
-                                                     <label class="control-label"> Website <span class="symbol required"></span> </label>
-                                                     <input type="text" placeholder="Enter Website" class="form-control" name="website" ng-model="myModel.website" required />
-                                                     <span class="error text-small block" ng-if="Form.website.$dirty && Form.website.$invalid">Website is required</span>
+                                                   <div class="form-group">
+                                                     <label class="control-label"> Website </label>
+                                                     <input type="text" placeholder="Enter Website" class="form-control" name="website" ng-model="myModel.website"  />
                                                    </div>
                                              </div>
                                           </div>
@@ -144,7 +146,7 @@
                                         <button type="submit" class="btn btn-primary" ng-click="submit(Form)">
                                             Submit
                                         </button>
-                                        <button type="reset" class="btn btn-primary btn-o" ng-click="reset(Form)">
+                                        <button type="reset" class="btn btn-primary btn-o" ng-click="reset()">
                                             Cancel
                                         </button>
                                     </div>

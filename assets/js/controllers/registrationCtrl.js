@@ -55,6 +55,24 @@ function ($scope, ngNotify, flowFactory, $rootScope, $http, $uibModal, $filter, 
 				chkOpentime7: 0,
 			};
 
+			$scope.disabled = true;
+			$scope.disabledAll = function(){
+				if($scope.isBilling == 0){
+					$scope.disabled = true;
+					$scope.regFrom.nameOnCard = null;
+					$scope.regFrom.cardNo = null;
+					$scope.regFrom.cardExpMonth=null;
+					$scope.regFrom.cardExpYear=null;
+					$scope.regFrom.bAddress1=null;
+					$scope.regFrom.bAddress2=null;
+				    $scope.regFrom.bStateId=null;
+					$scope.regFrom.bCity=null;
+					$scope.regFrom.bzipCode=null;
+				}else{
+					$scope.disabled = false;
+				}
+			}
+
 			$scope.changed1 = function() {
 				if($scope.regFrom.chkOpentime1 == 1){
 					var d = new Date();
@@ -206,7 +224,7 @@ function ($scope, ngNotify, flowFactory, $rootScope, $http, $uibModal, $filter, 
 							"disciplineId": $scope.regFrom.disciplineStr,
 							"contactModel" : {
 								"firstName": $scope.regFrom.firstName,
-								"lastName": ' ',
+								"lastName": $scope.regFrom.lastName,
 								"phone": $scope.regFrom.phoneNumber,
 								"email": $scope.regFrom.emailAddress,
 							},
@@ -228,7 +246,7 @@ function ($scope, ngNotify, flowFactory, $rootScope, $http, $uibModal, $filter, 
 								"fridayTime": o6 != null && c6 != null ? o6 + "," + c6 : '',
 								"saturdayTime": o7 != null && c7 != null ? o7 + "," + c7 : ''
 							},
-							"cardDetailModel" : {
+							"cardDetailModel" : $scope.isBilling == 1 ? {
 								"nameOnCard": $scope.regFrom.nameOnCard,
 								"cardNo": $scope.regFrom.cardNo,
 								"cardExpMonth": $scope.regFrom.cardExpMonth,
@@ -241,7 +259,7 @@ function ($scope, ngNotify, flowFactory, $rootScope, $http, $uibModal, $filter, 
 						      		"city" : $scope.regFrom.bCity,
 						      		"zip" : $scope.regFrom.bzipCode
 								}
-							}
+							} : null
 						};
 
 						$http({
@@ -328,6 +346,9 @@ function ($scope, ngNotify, flowFactory, $rootScope, $http, $uibModal, $filter, 
 			    }
 			  };
 			})();
+			$scope.goToLogIn = function(){
+				window.location = '#/login/login';
+			};
 		}
 	});
 

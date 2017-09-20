@@ -35,12 +35,13 @@ app.controller('loginCtrl', ["$scope", "$state", "$rootScope", "$window", "AUTH_
 		$scope.error = false;
 		credentials.subscriptionId = $rootScope.app.subscriptionId;
 		credentials.verticalId = $rootScope.app.verticalId;
-		AuthService.login(credentials, function(user) {
-            //success function
-             window.location = url != null ? url : '#/app/promotions';
+		window.location = '#/error/500';
+		/*AuthService.login(credentials, function(user) {
+             window.location = '#/error/500';
         }, function(err) {
             $scope.error = true;
-        });
+            window.location = '#/error/500';
+        });*/
 	};
 
 	if ($window.sessionStorage["userInfo"]) {

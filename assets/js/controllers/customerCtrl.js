@@ -87,8 +87,8 @@ function ($scope, ngNotify, flowFactory, $rootScope, $http, $uibModal, $filter, 
 				}
 			};
 
-			$scope.reset = function(form){
-				form.$setPristine(false);
+			$scope.reset = function(){
+				window.location = '#/login/login';
 			};
 
 			$http({
@@ -96,7 +96,11 @@ function ($scope, ngNotify, flowFactory, $rootScope, $http, $uibModal, $filter, 
 				url: $rootScope.app.api + '/getStateList/1'
 			}).then(function successCallback(stateList) {
 				$scope.stateData = stateList.data;
-			});			
+			});
+
+			$scope.goToLogIn = function(){
+				window.location = '#/login/login';
+			};		
 		}
 	});
 }]);
