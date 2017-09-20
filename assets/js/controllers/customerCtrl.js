@@ -75,14 +75,10 @@ function ($scope, ngNotify, flowFactory, $rootScope, $http, $uibModal, $filter, 
 	                    	$scope.notificationSuccess = 1;
 							$scope.notificationMessage = "Customer Registered Suceessfully";
 	                    } else {
-	                        $scope.submited = 1;
-	                        $scope.notificationSuccess = 0;
-							$scope.notificationMessage = response.data.error;
+	                        toaster.pop("error", "", response.data.error);
 	                    }
 	                }, function errorCallback(response) {
-	                	$scope.submited = 1;
-                        $scope.notificationSuccess = 0;
-						$scope.notificationMessage = response.data.error;
+	                	toaster.pop("error", "", response.data.error);
                     });
 				}
 			};
