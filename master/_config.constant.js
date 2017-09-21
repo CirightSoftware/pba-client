@@ -28,13 +28,13 @@ app.constant('JS_REQUIRES', {
         'd3': '../bower_components/d3/d3.min.js',
 
         //*** jQuery Plugins
-        'chartjs': '../bower_components/chartjs/Chart.min.js',
+        'chartjs': '../bower_components/chartjs/dist/Chart.min.js',
         'ckeditor-plugin': '../bower_components/ckeditor/ckeditor.js',
         'jquery-nestable-plugin': ['../bower_components/jquery-nestable/jquery.nestable.js'],
         'touchspin-plugin': ['../bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js', '../bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css'],
         'jquery-appear-plugin': ['../bower_components/jquery-appear/build/jquery.appear.min.js'],
         'spectrum-plugin': ['../bower_components/spectrum/spectrum.js', '../bower_components/spectrum/spectrum.css'],
-		'jcrop-plugin': ['../bower_components/Jcrop/js/jquery.Jcrop.min.js', '../bower_components/Jcrop/css/jquery.Jcrop.min.css'],
+		'jcrop-plugin': ['../bower_components/Jcrop/js/Jcrop.min.js', '../bower_components/Jcrop/css/Jcrop.min.css'],
 		
 		
         //*** Controllers
@@ -60,16 +60,16 @@ app.constant('JS_REQUIRES', {
         files: ['../bower_components/angular-bootstrap-nav-tree/dist/abn_tree_directive.js', '../bower_components/angular-bootstrap-nav-tree/dist/abn_tree.css']
     }, {
         name: 'ngTable',
-        files: ['../bower_components/ng-table/dist/ng-table.min.js', '../bower_components/ng-table/dist/ng-table.min.css']
+        files: ['../bower_components/ng-table-bundle/ng-table.min.js', '../bower_components/ng-table-bundle/ng-table.min.css']
     }, {
         name: 'ui.mask',
-        files: ['../bower_components/angular-ui-utils/mask.min.js']
+        files: ['../bower_components/angular-ui-mask/dist/mask.min.js']
     }, {
         name: 'ngImgCrop',
         files: ['../bower_components/ngImgCrop/compile/minified/ng-img-crop.js', '../bower_components/ngImgCrop/compile/minified/ng-img-crop.css']
     }, {
         name: 'angularFileUpload',
-        files: ['../bower_components/angular-file-upload/angular-file-upload.min.js']
+        files: ['../bower_components/angular-file-upload/dist/angular-file-upload.min.js']
     }, {
         name: 'monospaced.elastic',
         files: ['../bower_components/angular-elastic/elastic.js']
@@ -78,7 +78,7 @@ app.constant('JS_REQUIRES', {
         files: ['../bower_components/ngmap/build/scripts/ng-map.min.js']
     }, {
         name: 'chart.js',
-        files: ['..//bower_components/angular-chart.js/dist/angular-chart.min.js', '..//bower_components/angular-chart.js/dist/angular-chart.min.css']
+        files: ['..//bower_components/angular-chart.js/dist/Chart.min.js']
     }, {
         name: 'flow',
         files: ['../bower_components/ng-flow/dist/ng-flow-standalone.min.js']

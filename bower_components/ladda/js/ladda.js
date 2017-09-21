@@ -3,10 +3,10 @@
  * http://lab.hakim.se/ladda
  * MIT licensed
  *
- * Copyright (C) 2015 Hakim El Hattab, http://hakim.se
+ * Copyright (C) 2016 Hakim El Hattab, http://hakim.se
  */
-/* jshint node:true, browser:true */
 (function( root, factory ) {
+	'use strict';
 
 	// CommonJS
 	if( typeof exports === 'object' )  {
@@ -42,10 +42,22 @@
 			return;
 		}
 
+		// The button must have the class "ladda-button"
+		if( !/ladda-button/i.test( button.className ) ) {
+			button.className += ' ladda-button';
+		}
+
+		// Style is required, default to "expand-right"
+		if( !button.hasAttribute( 'data-style' ) ) {
+			button.setAttribute( 'data-style', 'expand-right' );
+		}
+
 		// The text contents must be wrapped in a ladda-label
 		// element, create one if it doesn't already exist
 		if( !button.querySelector( '.ladda-label' ) ) {
-			button.innerHTML = '<span class="ladda-label">'+ button.innerHTML +'</span>';
+			var laddaLabel = document.createElement( 'span' );
+			laddaLabel.className = 'ladda-label';
+			wrapContent( button, laddaLabel );
 		}
 
 		// The spinner component
@@ -71,9 +83,11 @@
 			start: function() {
 
 				// Create the spinner if it doesn't already exist
-				if( !spinner ) spinner = createSpinner( button );
+				if( !spinner ) {
+					spinner = createSpinner( button );
+				}
 
-				button.setAttribute( 'disabled', '' );
+				button.disabled = true;
 				button.setAttribute( 'data-loading', '' );
 
 				clearTimeout( timer );
@@ -102,7 +116,7 @@
 			 */
 			stop: function() {
 
-				button.removeAttribute( 'disabled' );
+				button.disabled = false;
 				button.removeAttribute( 'data-loading' );
 
 				// Kill the animation after a delay to make sure it
@@ -121,16 +135,7 @@
 			 * Toggle the loading state on/off.
 			 */
 			toggle: function() {
-
-				if( this.isLoading() ) {
-					this.stop();
-				}
-				else {
-					this.start();
-				}
-
-				return this; // chain
-
+				return this.isLoading() ? this.stop() : this.start();
 			},
 
 			/**
@@ -162,18 +167,22 @@
 
 			},
 
+			/**
+			 * @deprecated
+			 */
 			enable: function() {
 
-				this.stop();
-
-				return this; // chain
+				return this.stop();
 
 			},
 
+			/**
+			 * @deprecated
+			 */
 			disable: function () {
 
 				this.stop();
-				button.setAttribute( 'disabled', '' );
+				button.disabled = true;
 
 				return this; // chain
 
@@ -189,7 +198,7 @@
 
 				clearTimeout( timer );
 
-				button.removeAttribute( 'disabled', '' );
+				button.disabled = false;
 				button.removeAttribute( 'data-loading', '' );
 
 				if( spinner ) {
@@ -197,12 +206,7 @@
 					spinner = null;
 				}
 
-				for( var i = 0, len = ALL_INSTANCES.length; i < len; i++ ) {
-					if( instance === ALL_INSTANCES[i] ) {
-						ALL_INSTANCES.splice( i, 1 );
-						break;
-					}
-				}
+				ALL_INSTANCES.splice( ALL_INSTANCES.indexOf(instance), 1 );
 
 			}
 
@@ -249,7 +253,7 @@
 		for( var i = 0; i < requirables.length; i++ ) {
 			var candidates = form.getElementsByTagName( requirables[i] );
 			for( var j = 0; j < candidates.length; j++ ) {
-				if ( candidates[j].hasAttribute( 'required' ) ) {
+				if ( candidates[j].required ) {
 					inputs.push( candidates[j] );
 				}
 			}
@@ -271,79 +275,21 @@
 	 */
 	function bind( target, options ) {
 
-		options = options || {};
-
-		var targets = [];
+		var targets;
 
 		if( typeof target === 'string' ) {
-			targets = toArray( document.querySelectorAll( target ) );
+			targets = document.querySelectorAll( target );
 		}
-		else if( typeof target === 'object' && typeof target.nodeName === 'string' ) {
+		else if( typeof target === 'object' ) {
 			targets = [ target ];
+		} else {
+			throw new Error('target must be string or object');
 		}
 
-		for( var i = 0, len = targets.length; i < len; i++ ) {
+		options = options || {};
 
-			(function() {
-				var element = targets[i];
-
-				// Make sure we're working with a DOM element
-				if( typeof element.addEventListener === 'function' ) {
-					var instance = create( element );
-					var timeout = -1;
-
-					element.addEventListener( 'click', function( event ) {
-
-						// If the button belongs to a form, make sure all the
-						// fields in that form are filled out
-						var valid = true;
-						var form = getAncestorOfTagType( element, 'FORM' );
-
-						if( typeof form !== 'undefined' ) {
-							var requireds = getRequiredFields( form );
-							for( var i = 0; i < requireds.length; i++ ) {
-
-								// Alternatively to this trim() check,
-								// we could have use .checkValidity() or .validity.valid
-								if( requireds[i].value.replace( /^\s+|\s+$/g, '' ) === '' ) {
-									valid = false;
-								}
-
-								// Radiobuttons and Checkboxes need to be checked for the "checked" attribute
-								if( (requireds[i].type === 'checkbox' || requireds[i].type === 'radio' ) && !requireds[i].checked ) {
-									valid = false;
-								}
-
-								// Email field validation, otherwise button starts spinning although field is not complete
-								if( requireds[i].type === 'email' ) {
-									valid = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test( requireds[i].value );
-								}
-
-							}
-						}
-
-						if( valid ) {
-							// This is asynchronous to avoid an issue where setting
-							// the disabled attribute on the button prevents forms
-							// from submitting
-							instance.startAfter( 1 );
-
-							// Set a loading timeout if one is specified
-							if( typeof options.timeout === 'number' ) {
-								clearTimeout( timeout );
-								timeout = setTimeout( instance.stop, options.timeout );
-							}
-
-							// Invoke callbacks
-							if( typeof options.callback === 'function' ) {
-								options.callback.apply( null, [ instance ] );
-							}
-						}
-
-					}, false );
-				}
-			})();
-
+		for( var i = 0; i < targets.length; i++ ) {
+			bindElement(targets[i], options);
 		}
 
 	}
@@ -362,7 +308,8 @@
 	function createSpinner( button ) {
 
 		var height = button.offsetHeight,
-			spinnerColor;
+			spinnerColor,
+			spinnerLines;
 
 		if( height === 0 ) {
 			// We may have an element that is not visible so
@@ -385,14 +332,18 @@
 			spinnerColor = button.getAttribute( 'data-spinner-color' );
 		}
 
-		var lines = 12,
-			radius = height * 0.2,
+		// Allow buttons to specify the number of lines of the spinner
+		if( button.hasAttribute( 'data-spinner-lines' ) ) {
+			spinnerLines = parseInt( button.getAttribute( 'data-spinner-lines' ), 10 );
+		}
+
+		var radius = height * 0.2,
 			length = radius * 0.6,
 			width = radius < 7 ? 2 : 3;
 
 		return new Spinner( {
 			color: spinnerColor || '#fff',
-			lines: lines,
+			lines: spinnerLines || 12,
 			radius: radius,
 			length: length,
 			width: width,
@@ -404,15 +355,77 @@
 
 	}
 
-	function toArray( nodes ) {
+	function wrapContent( node, wrapper ) {
 
-		var a = [];
+		var r = document.createRange();
+		r.selectNodeContents( node );
+		r.surroundContents( wrapper );
+		node.appendChild( wrapper );
 
-		for ( var i = 0; i < nodes.length; i++ ) {
-			a.push( nodes[ i ] );
+	}
+
+	function bindElement( element, options ) {
+		if( typeof element.addEventListener !== 'function' ) {
+			return;
 		}
 
-		return a;
+		var instance = create( element );
+		var timeout = -1;
+
+		element.addEventListener( 'click', function() {
+
+			// If the button belongs to a form, make sure all the
+			// fields in that form are filled out
+			var valid = true;
+			var form = getAncestorOfTagType( element, 'FORM' );
+
+			if( typeof form !== 'undefined' ) {
+				// Modern form validation
+				if( typeof form.checkValidity === 'function' ) {
+					valid = form.checkValidity();
+				}
+				// Fallback to manual validation for old browsers
+				else {
+					var requireds = getRequiredFields( form );
+					for( var i = 0; i < requireds.length; i++ ) {
+
+						if( requireds[i].value.replace( /^\s+|\s+$/g, '' ) === '' ) {
+							valid = false;
+						}
+
+						// Radiobuttons and Checkboxes need to be checked for the "checked" attribute
+						if( (requireds[i].type === 'checkbox' || requireds[i].type === 'radio' ) && !requireds[i].checked ) {
+							valid = false;
+						}
+
+						// Email field validation
+						if( requireds[i].type === 'email' ) {
+							valid = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test( requireds[i].value );
+						}
+
+					}
+				}
+			}
+
+			if( valid ) {
+				// This is asynchronous to avoid an issue where setting
+				// the disabled attribute on the button prevents forms
+				// from submitting
+				instance.startAfter( 1 );
+
+				// Set a loading timeout if one is specified
+				if( typeof options.timeout === 'number' ) {
+					clearTimeout( timeout );
+					timeout = setTimeout( instance.stop, options.timeout );
+				}
+
+				// Invoke callbacks
+				if( typeof options.callback === 'function' ) {
+					options.callback.apply( null, [ instance ] );
+				}
+			}
+
+		}, false );
 
 	}
 

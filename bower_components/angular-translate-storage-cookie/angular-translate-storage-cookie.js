@@ -1,7 +1,7 @@
 /*!
- * angular-translate - v2.7.2 - 2015-06-01
- * http://github.com/angular-translate/angular-translate
- * Copyright (c) 2015 ; Licensed MIT
+ * angular-translate - v2.15.2 - 2017-06-22
+ * 
+ * Copyright (c) 2017 The angular-translate team, Pascal Precht; Licensed MIT
  */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -9,7 +9,7 @@
     define([], function () {
       return (factory());
     });
-  } else if (typeof exports === 'object') {
+  } else if (typeof module === 'object' && module.exports) {
     // Node. Does not work with strict CommonJS, but
     // only CommonJS-like environments that support module.exports,
     // like Node.
@@ -19,6 +19,7 @@
   }
 }(this, function () {
 
+$translateCookieStorageFactory.$inject = ['$injector'];
 angular.module('pascalprecht.translate')
 
 /**
@@ -33,9 +34,33 @@ angular.module('pascalprecht.translate')
  */
   .factory('$translateCookieStorage', $translateCookieStorageFactory);
 
-function $translateCookieStorageFactory($cookieStore) {
+function $translateCookieStorageFactory($injector) {
 
   'use strict';
+
+  // Since AngularJS 1.4, $cookieStore is deprecated
+  var delegate;
+  if (angular.version.major === 1 && angular.version.minor >= 4) {
+    var $cookies = $injector.get('$cookies');
+    delegate = {
+      get : function (key) {
+        return $cookies.get(key);
+      },
+      put : function (key, value) {
+        $cookies.put(key, value);
+      }
+    };
+  } else {
+    var $cookieStore = $injector.get('$cookieStore');
+    delegate = {
+      get : function (key) {
+        return $cookieStore.get(key);
+      },
+      put : function (key, value) {
+        $cookieStore.put(key, value);
+      }
+    };
+  }
 
   var $translateCookieStorage = {
 
@@ -50,8 +75,8 @@ function $translateCookieStorageFactory($cookieStore) {
      * @param {string} name Item name
      * @return {string} Value of item name
      */
-    get: function (name) {
-      return $cookieStore.get(name);
+    get : function (name) {
+      return delegate.get(name);
     },
 
     /**
@@ -67,8 +92,8 @@ function $translateCookieStorageFactory($cookieStore) {
      * @param {string} name Item name
      * @param {string} value Item value
      */
-    set: function (name, value) {
-      $cookieStore.put(name, value);
+    set : function (name, value) {
+      delegate.put(name, value);
     },
 
     /**
@@ -82,14 +107,13 @@ function $translateCookieStorageFactory($cookieStore) {
      * @param {string} name Item name
      * @param {string} value Item value
      */
-    put: function (name, value) {
-      $cookieStore.put(name, value);
+    put : function (name, value) {
+      delegate.put(name, value);
     }
   };
 
   return $translateCookieStorage;
 }
-$translateCookieStorageFactory.$inject = ['$cookieStore'];
 
 $translateCookieStorageFactory.displayName = '$translateCookieStorage';
 return 'pascalprecht.translate';

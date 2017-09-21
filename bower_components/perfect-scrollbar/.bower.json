@@ -1,6 +1,6 @@
 {
   "name": "perfect-scrollbar",
-  "version": "0.6.16",
+  "version": "0.8.1",
   "homepage": "http://noraesae.github.io/perfect-scrollbar/",
   "authors": [
     "Hyunje Jun <me@noraesae.net>"
@@ -15,13 +15,13 @@
     "**/.*",
     "bower_components"
   ],
-  "_release": "0.6.16",
+  "_release": "0.8.1",
   "_resolution": {
     "type": "version",
-    "tag": "0.6.16",
-    "commit": "3049129e5dbb403295ce8507a461cdd0f200938c"
+    "tag": "0.8.1",
+    "commit": "b0a26373855b3d31ce5bd9904e2ba4d9a24ebf52"
   },
   "_source": "https://github.com/noraesae/perfect-scrollbar-bower.git",
-  "_target": "~0.6.1",
+  "_target": "~0.8.1",
   "_originalSource": "perfect-scrollbar"
 }

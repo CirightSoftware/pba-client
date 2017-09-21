@@ -28,6 +28,6 @@
     "commit": "8d05243f2e6935b41b1665bc4106280f2a7c1144"
   },
   "_source": "https://github.com/pfitzpaddy/angular-count-to.git",
-  "_target": "~0.0.3",
+  "_target": "~0.0.9",
   "_originalSource": "angular-count-to-0.1.1"
 }

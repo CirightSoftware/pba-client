@@ -229,8 +229,11 @@ function ($rootScope, $scope, $state, $swipe, $translate, $localStorage, $window
       AuthService.logout();
     };
 
-    $http.get('config.json').success(function(response) {
-        $rootScope.app.subscriptionId = response.subscriptionId;
+    $http({method: 'GET', url: 'config.json'})
+        .then(function successCallback(response) {
+        $rootScope.app.subscriptionId = response.data.subscriptionId;
+    }, function errorCallback(response) {
+        console.log(response.data.error);
     });
 
     var showNotAuthorized = function(){

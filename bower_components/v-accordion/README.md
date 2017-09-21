@@ -4,12 +4,13 @@
   - Allows for a nested structure
   - Works with (or without) `ng-repeat`
   - Allows multiple sections to be open at once
-  - Optimized for mobile devices
 
 
-## Demo
+## Examples
 
   - [GitHub](http://lukaszwatroba.github.io/v-accordion)
+  - [CodePen](http://codepen.io/LukaszWatroba/pen/MwdaLo)
+  - [Linksfridge](https://linksfridge.com/help)
 
 
 ## Usage
@@ -26,9 +27,9 @@
   <script src="v-accordion.js"></script>
   ```
 
-  - Add `vAccordion` as a dependency to your application module:
+  - Add `vAccordion` and `ngAnimate` as dependencies to your application module:
   ```js
-  angular.module('myApp', ['vAccordion']);
+  angular.module('myApp', ['vAccordion', 'ngAnimate']);
   ```
 
   - Put the following markup in your template:
@@ -47,7 +48,7 @@
       </v-pane-content>
     </v-pane>
 
-    <v-pane>
+    <v-pane disabled>
       <v-pane-header>
         Pane header #2
       </v-pane-header>
@@ -64,22 +65,22 @@
   ```html
   <v-accordion class="vAccordion--default">
 
-    <v-pane ng-repeat="pane in panes" expanded="$first">
+    <v-pane ng-repeat="pane in panes" expanded="pane.isExpanded">
       <v-pane-header>
-        {{ pane.header }}
+        {{ ::pane.header }}
       </v-pane-header>
 
       <v-pane-content>
-        {{ pane.content }}
+        {{ ::pane.content }}
 
         <!-- accordions can be nested :) -->
         <v-accordion ng-if="pane.subpanes">
-          <v-pane ng-repeat="subpane in pane.subpanes">
+          <v-pane ng-repeat="subpane in pane.subpanes" ng-disabled="subpane.isDisabled">
             <v-pane-header>
-              {{ subpane.header }}
+              {{ ::subpane.header }}
             </v-pane-header>
             <v-pane-content>
-              {{ subpane.content }}
+              {{ ::subpane.content }}
             </v-pane-content>
           </v-pane>
         </v-accordion>
@@ -92,18 +93,27 @@
 
 ## API
 
-Use API methods to control accordion component:
+#### Control
+
+Add `control` attribute and use the following methods to control vAccordion from it's parent scope:
+
+  - `toggle(indexOrId)`
+  - `expand(indexOrId)`
+  - `collapse(indexOrId)`
+  - `expandAll()`
+  - `collapseAll()`
+  - `hasExpandedPane()`
 
 ```html
-<v-accordion multiple control="accordion">
+<v-accordion id="my-accordion" multiple control="accordion">
 
-  <v-pane ng-repeat="pane in panes">
+  <v-pane id="{{ pane.id }}" ng-repeat="pane in panes">
     <v-pane-header>
-      {{ pane.header }}
+      {{ ::pane.header }}
     </v-pane-header>
 
     <v-pane-content>
-      {{ pane.content }}
+      {{ ::pane.content }}
     </v-pane-content>
   </v-pane>
 
@@ -114,54 +124,130 @@ Use API methods to control accordion component:
 <button ng-click="accordion.collapseAll()">Collapse all</button>
 ```
 
-#### Methods
+```js
+$scope.$on('my-accordion:onReady', function () {
+  var firstPane = $scope.panes[0];
+  $scope.accordion.toggle(firstPane.id);
+});
+```
 
-  - `toggle(paneIndex)`
-  - `expand(paneIndex)`
-  - `collapse(paneIndex)`
+#### Scope
+
+`$accordion` and `$pane` properties allows you to control the directive from it's transcluded scope.
+
+##### $accordion
+
+  - `toggle(indexOrId)`
+  - `expand(indexOrId)`
+  - `collapse(indexOrId)`
   - `expandAll()`
   - `collapseAll()`
+  - `hasExpandedPane()`
+  - `id`
+
+##### $pane
+
+  - `toggle()`
+  - `expand()`
+  - `collapse()`
+  - `isExpanded()`
+  - `id`
+
+```html
+<v-accordion multiple>
+
+  <v-pane ng-repeat="pane in panes">
+    <!-- here's how you can create a custom toggle button -->
+    <v-pane-header inactive>
+      {{ ::pane.header }}
+      <button ng-click="$pane.toggle()">Toggle me</button>
+    </v-pane-header>
+
+    <v-pane-content>
+      {{ ::pane.content }}
+    </v-pane-content>
+  </v-pane>
+
+  <button ng-click="$accordion.expandAll()">Expand all</button>
+
+</v-accordion>
+```
 
 
 #### Events
 
-  - `vAccordion:onExpand`
-  - `vAccordion:onExpandAnimationEnd`
-  - `vAccordion:onCollapse`
-  - `vAccordion:onCollapseAnimationEnd`
+The directive emits the following events:
+
+  - `vAccordion:onReady` or `yourAccordionId:onReady`
+  - `vAccordion:onExpand` or `yourAccordionId:onExpand`
+  - `vAccordion:onExpandAnimationEnd` or `yourAccordionId:onExpandAnimationEnd`
+  - `vAccordion:onCollapse` or `yourAccordionId:onCollapse`
+  - `vAccordion:onCollapseAnimationEnd` or `yourAccordionId:onCollapseAnimationEnd`
 
 
 ## Callbacks
 
-Use these callbacks to get expanded/collapsed pane index:
-
+Use these callbacks to get the expanded/collapsed pane index and id:
 
 ```html
-<v-accordion onexpand="expandCallback(index)" oncollapse="collapseCallback(index)">
+<v-accordion onexpand="expandCallback(index, id)" oncollapse="collapseCallback(index, id)">
 
-  <v-pane ng-repeat="pane in panes">
+  <v-pane id="{{ ::pane.id }}" ng-repeat="pane in panes">
     <v-pane-header>
-      {{ pane.header }}
+      {{ ::pane.header }}
     </v-pane-header>
 
     <v-pane-content>
-      {{ pane.content }}
+      {{ ::pane.content }}
     </v-pane-content>
   </v-pane>
 
 </v-accordion>
 ```
 
-
 ```js
-$scope.expandCallback = function (index) {
-  console.log('expanded pane index:', index);
+$scope.expandCallback = function (index, id) {
+  console.log('expanded pane:', index, id);
 };
 
-$scope.collapseCallback = function (index) {
-  console.log('collapsed pane index:', index);
+$scope.collapseCallback = function (index, id) {
+  console.log('collapsed pane:', index, id));
 };
 ```
+
+
+## Configuration
+
+#### Module
+To change the default animation duration, inject `accordionConfig` provider in your app config:
+
+```javascript
+angular
+  .module('myApp', ['vAccordion'])
+  .config(function (accordionConfig) {
+    accordionConfig.expandAnimationDuration = 0.5;
+  });
+```
+
+#### SCSS
+If you are using SASS, you can import vAccordion.scss file and override the following variables:
+
+```scss
+$v-accordion-default-theme:         true !default;
+
+$v-accordion-spacing:               20px !default;
+
+$v-pane-border-color:               #D8D8D8 !default;
+$v-pane-expanded-border-color:      #2196F3 !default;
+$v-pane-icon-color:                 #2196F3 !default;
+$v-pane-hover-color:                #2196F3 !default;
+
+$v-pane-disabled-opacity:           0.6   !default;
+
+$v-pane-expand-animation-duration:  0.5s  !default;
+$v-pane-hover-animation-duration:   0.25s !default;
+```
+
 
 ## Accessibility
 vAccordion manages keyboard focus and adds some common aria-* attributes. BUT you should additionally place the `aria-controls` and `aria-labelledby` as follows:
@@ -170,12 +256,12 @@ vAccordion manages keyboard focus and adds some common aria-* attributes. BUT yo
 <v-accordion>
 
   <v-pane ng-repeat="pane in panes">
-    <v-pane-header id="pane{{$index}}-header" aria-controls="pane{{$index}}-content">
-      {{ pane.header }}
+    <v-pane-header id="{{ ::pane.id }}-header" aria-controls="{{ ::pane.id }}-content">
+      {{ ::pane.header }}
     </v-pane-header>
 
-    <v-pane-content id="pane{{$index}}-content" aria-labelledby="pane{{$index}}-header">
-      {{ pane.content }}
+    <v-pane-content id="{{ ::pane.id }}-content" aria-labelledby="{{ ::pane.id }}-header">
+      {{ ::pane.content }}
     </v-pane-content>
   </v-pane>
 

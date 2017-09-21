@@ -1,5 +1,4 @@
 (function(window, angular, undefined) {
-
   'use strict';
 
   /* global -ngSwipe */
@@ -149,6 +148,17 @@
 
         var startCoords, valid;
 
+        function checkOverride(element, clazz) {
+          do {
+            var className = element.getAttribute('class');
+            if (className && className.match(clazz) !== null) {
+              return true;
+            }
+            element = element.parentElement;
+          } while (element !== null);
+          return false;
+        }
+
         function validSwipe(coords) {
 
           if (! startCoords || ! valid){
@@ -158,18 +168,22 @@
           var deltaY = (coords.y - startCoords.y) * direction;
           var deltaX = (coords.x - startCoords.x) * direction;
 
-          if (! axis){  // horizontal swipe
+          if(axis === null) { // tap
+              return Math.abs(deltaY) < MIN_DISTANCE &&
+                     Math.abs(deltaX) < MIN_DISTANCE;
+          }
+          else if(axis === false) {  // horizontal swipe
             return Math.abs(deltaY) < MAX_OTHER_AXIS_DISTANCE &&
               deltaX > 0 &&
               deltaX > MIN_DISTANCE &&
               Math.abs(deltaY) / deltaX < MAX_RATIO;
-          } else {  // vertical swipe
+          }
+          else {  // vertical swipe
             return Math.abs(deltaX) < MAX_OTHER_AXIS_DISTANCE &&
               deltaY > 0 &&
               deltaY > MIN_DISTANCE &&
               Math.abs(deltaX) / deltaY < MAX_RATIO;
           }
-
         }
 
         var pointerTypes = ['touch'];
@@ -180,12 +194,11 @@
 
         swipe.bind(element, {
           'start': function(coords, event) {
-            var className = event.target.getAttribute('class');
-            if (axis && (! className || className && className.match('noPreventDefault') === null)) {
+            if (axis && !checkOverride(event.target, 'noPreventDefault')) {
               event.preventDefault();
             }
             startCoords = coords;
-            valid = true;
+            valid = !checkOverride(event.target, 'noStartDrag');
           },
           'cancel': function() {
             valid = false;
@@ -217,4 +230,5 @@
   makeSwipeDirective('ngSwipeUp', -1, true, 'swipeup');
   makeSwipeDirective('ngSwipeDown', 1, true, 'swipedown');
 
+  makeSwipeDirective('ngTap', 1, null, 'tap');
 })(window, window.angular);

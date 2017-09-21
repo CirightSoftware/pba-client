@@ -1,25 +1,21 @@
 GoogleMap AngularJS Directive
 =============================
-
+<!--
 [![Build Status](https://travis-ci.org/allenhwkim/angularjs-google-maps.png?branch=master)](https://travis-ci.org/allenhwkim/angularjs-google-maps)
+-->
 
-IMPORTANT NOTICE
------------------
-
- - `$scope.map` is deprecated. Use `NgMap.getMap().then(function(map) {...})`
-    instead to get a map instance.
- - `$scope.$on('mapInitialized', function(event, map) {..}` is deprecated.
-    Use `NgMap.getMap().then(function(map) {...})` instead to get a map instance.
- - `$scope.showInfoWindow(id)` is deprecated. `map.showInfoWindow(id)` instead.
-    You need to get map instance usng `NgMap.getMap().then()` in advance.
- - `map` tag is deprecated. Use `ng-map` tag instead
-
-[Demo](http://ngmap.github.io)  
+[Demo](https://ngmap.github.io)  
 [Documentation](https://rawgithub.com/allenhwkim/angularjs-google-maps/master/build/docs/index.html)  
 [Road Trip By StreetView](https://rawgit.com/allenhwkim/angularjs-google-maps/master/testapp/street-view_road_trip.html)  
 [Maps Can Talk](https://rawgit.com/allenhwkim/angularjs-google-maps/master/testapp/custom-marker.html) |
 [Custom Marker](https://rawgit.com/allenhwkim/angularjs-google-maps/master/testapp/custom-marker-2.html)  
 
+If you like this, you also may like these;
+* [ng2-map](https://github.com/ng2-ui/ng2-maps) Google Maps Wrapper for Angular 2+
+* [react-openlayers](https://github.com/allenhwkim/react-openlayers) React + OpenLayers
+
+Background
+-----------------
 There is already [one](https://github.com/nlaplante/angular-google-maps) for this. However, I found myself doing totally different approach than the existing one, such as;
 
 1. **Everything in tag and attributes.**   
@@ -58,6 +54,10 @@ To get the map instance use the `NgMap.getMap()` function
       });
     });
 
+For npm users, 
+
+  `$ npm install ngmap`
+
 For meteor users: https://atmospherejs.com/wormy/angularjs-google-maps
 
 Lazy Loading of Google Maps Javascript
@@ -76,6 +76,20 @@ Lazy Loading of Google Maps Javascript
       map-lazy-load-params="{{googleMapsUrl}}">
       <ng-map center="41,-87" zoom="3"></ng-map>
     </div>
+    
+FAQ
+----
+## Grey area in Google maps
+
+The usual reason why this is happening is that the size of the map is changed after the map has been initialized. If you for some reason change the size of the div, you need to trigger the "resize" event and possible reCenter the map.
+
+     var center = map.getCenter();
+     google.maps.event.trigger(map, "resize");
+     map.setCenter(center);
+
+Ref.
+  * http://stackoverflow.com/questions/13901520/grey-area-in-google-maps
+  * http://blog.codebusters.pl/en/google-maps-in-hidden-div/
 
 Directives
 ----------

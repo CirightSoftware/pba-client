@@ -2,9 +2,6 @@
 
 var instances = require('./instances');
 
-var lastTop;
-var lastLeft;
-
 var createDOMEvent = function (name) {
   var event = document.createEvent("Event");
   event.initEvent(name, true, true);
@@ -39,7 +36,7 @@ module.exports = function (element, axis, value) {
   if (axis === 'top' && value >= i.contentHeight - i.containerHeight) {
     // don't allow scroll past container
     value = i.contentHeight - i.containerHeight;
-    if (value - element.scrollTop <= 1) {
+    if (value - element.scrollTop <= 2) {
       // mitigates rounding errors on non-subpixel scroll values
       value = element.scrollTop;
     } else {
@@ -51,7 +48,7 @@ module.exports = function (element, axis, value) {
   if (axis === 'left' && value >= i.contentWidth - i.containerWidth) {
     // don't allow scroll past container
     value = i.contentWidth - i.containerWidth;
-    if (value - element.scrollLeft <= 1) {
+    if (value - element.scrollLeft <= 2) {
       // mitigates rounding errors on non-subpixel scroll values
       value = element.scrollLeft;
     } else {
@@ -60,37 +57,37 @@ module.exports = function (element, axis, value) {
     element.dispatchEvent(createDOMEvent('ps-x-reach-end'));
   }
 
-  if (!lastTop) {
-    lastTop = element.scrollTop;
+  if (i.lastTop === undefined) {
+    i.lastTop = element.scrollTop;
   }
 
-  if (!lastLeft) {
-    lastLeft = element.scrollLeft;
+  if (i.lastLeft === undefined) {
+    i.lastLeft = element.scrollLeft;
   }
 
-  if (axis === 'top' && value < lastTop) {
+  if (axis === 'top' && value < i.lastTop) {
     element.dispatchEvent(createDOMEvent('ps-scroll-up'));
   }
 
-  if (axis === 'top' && value > lastTop) {
+  if (axis === 'top' && value > i.lastTop) {
     element.dispatchEvent(createDOMEvent('ps-scroll-down'));
   }
 
-  if (axis === 'left' && value < lastLeft) {
+  if (axis === 'left' && value < i.lastLeft) {
     element.dispatchEvent(createDOMEvent('ps-scroll-left'));
   }
 
-  if (axis === 'left' && value > lastLeft) {
+  if (axis === 'left' && value > i.lastLeft) {
     element.dispatchEvent(createDOMEvent('ps-scroll-right'));
   }
 
-  if (axis === 'top') {
-    element.scrollTop = lastTop = value;
+  if (axis === 'top' && value !== i.lastTop) {
+    element.scrollTop = i.lastTop = value;
     element.dispatchEvent(createDOMEvent('ps-scroll-y'));
   }
 
-  if (axis === 'left') {
-    element.scrollLeft = lastLeft = value;
+  if (axis === 'left' && value !== i.lastLeft) {
+    element.scrollLeft = i.lastLeft = value;
     element.dispatchEvent(createDOMEvent('ps-scroll-x'));
   }
 

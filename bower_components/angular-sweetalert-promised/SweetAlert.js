@@ -5,66 +5,74 @@
 
 */
 
-'use strict';
+(function (root, factory) {
+	"use strict";
 
-angular.module('oitozero.ngSweetAlert', [])
-.factory('SweetAlert', [ '$timeout', '$window', function ( $timeout, $window ) {
+	/*global define*/
+	if (typeof define === 'function' && define.amd) {
+		define(['angular', 'sweetalert'], factory);  // AMD
+	} else if (typeof module === 'object' && module.exports) {
+		module.exports = factory(require('angular'), require('sweetalert')); // Node
+	} else {
+		factory(root.angular, root.swal);					// Browser
+	}
 
-	var swal = $window.swal;
+}(this, function (angular, swal) {
+	"use strict";
 
-	//public methods
-	var self = {
+	angular.module('oitozero.ngSweetAlert', [])
+		.factory('SweetAlert', [ '$rootScope', function ( $rootScope ) {
+			//public methods
+			var self = {
 
-		swal: function ( arg1, arg2, arg3 ) {
-			$timeout(function(){
-				if( typeof(arg2) === 'function' ) {
-					swal( arg1, function(isConfirm){
-						$timeout( function(){
-							arg2(isConfirm);
-						});
-					}, arg3 );
-				} else {
-					swal( arg1, arg2, arg3 );
+				swal: function ( arg1, arg2, arg3 ) {
+					$rootScope.$evalAsync(function(){
+						if( typeof(arg2) === 'function' ) {
+							swal( arg1, function(isConfirm){
+								$rootScope.$evalAsync( function(){
+									arg2(isConfirm);
+								});
+							}, arg3 );
+						} else {
+							swal( arg1, arg2, arg3 );
+						}
+					});
+				},
+				success: function(title, message) {
+					$rootScope.$evalAsync(function(){
+						swal( title, message, 'success' );
+					});
+				},
+				error: function(title, message) {
+					$rootScope.$evalAsync(function(){
+						swal( title, message, 'error' );
+					});
+				},
+				warning: function(title, message) {
+					$rootScope.$evalAsync(function(){
+						swal( title, message, 'warning' );
+					});
+				},
+				info: function(title, message) {
+					$rootScope.$evalAsync(function(){
+						swal( title, message, 'info' );
+					});
+				},
+				showInputError: function(message) {
+					$rootScope.$evalAsync(function(){
+						swal.showInputError( message );
+					});
+				},
+				close: function() {
+					$rootScope.$evalAsync(function(){
+						swal.close();
+					});
 				}
-			}, 200);
-		},
-		adv: function( object ) {
-			$timeout(function() {
-				swal( object );
-			}, 200);
-		},
-		timed: function( title, message, type, time ) {
-			$timeout(function() {
-				swal( {
-					title: title,
-					text: message,
-					type: type,
-					timer: time
-				} );
-			}, 200);
-		},
-		success: function(title, message) {
-			$timeout(function(){
-				swal( title, message, 'success' );
-			}, 200);
-		},
-		error: function(title, message) {
-			$timeout(function(){
-				swal( title, message, 'error' );
-			}, 200);
-		},
-		warning: function(title, message) {
-			$timeout(function(){
-				swal( title, message, 'warning' );
-			}, 200);
-		},
-		info: function(title, message) {	
-			$timeout(function(){
-				swal( title, message, 'info' );
-			}, 200);
-		}
-	};
-	
-	return self;
-}]);
+			};
+
+			return self;
+		}]);
+}));
+
+
 

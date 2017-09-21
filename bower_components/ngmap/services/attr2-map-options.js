@@ -13,9 +13,12 @@
     /^(\d{4}\-\d\d\-\d\d([tT][\d:\.]*)?)([zZ]|([+\-])(\d\d):?(\d\d))?$/;
 
   var Attr2MapOptions = function(
-      $parse, $timeout, $log, NavigatorGeolocation, GeoCoder,
-      camelCaseFilter, jsonizeFilter
+      $parse, $timeout, $log, $interpolate, NavigatorGeolocation, GeoCoder,
+      camelCaseFilter, jsonizeFilter, escapeRegExp
     ) {
+
+    var exprStartSymbol = $interpolate.startSymbol();
+    var exprEndSymbol = $interpolate.endSymbol();
 
     /**
      * Returns the attributes of an element as hash
@@ -40,14 +43,26 @@
       }
       return JSON.parse(jsonizeFilter(input));
     };
-
+    
     var getLatLng = function(input) {
       var output = input;
-      if (input[0].constructor == Array) { // [[1,2],[3,4]]
-        output = input.map(function(el) {
-          return new google.maps.LatLng(el[0], el[1]);
-        });
-      } else if(!isNaN(parseFloat(input[0])) && isFinite(input[0])) {
+      if (input[0].constructor == Array) { 
+        if ((input[0][0].constructor == Array && input[0][0].length == 2) || input[0][0].constructor == Object) {
+            var preoutput;
+            var outputArray = [];
+            for (var i = 0; i < input.length; i++) {
+                preoutput = input[i].map(function(el){
+                    return new google.maps.LatLng(el[0], el[1]);
+                });
+                outputArray.push(preoutput);
+            }
+            output = outputArray;
+        } else {
+            output = input.map(function(el) {
+                return new google.maps.LatLng(el[0], el[1]);
+            });
+        }
+      } else if (!isNaN(parseFloat(input[0])) && isFinite(input[0])) {
         output = new google.maps.LatLng(output[0], output[1]);
       }
       return output;
@@ -61,11 +76,16 @@
         try { // 2. JSON?
           var output = getJSON(input);
           if (output instanceof Array) {
-            // [{a:1}] : not lat/lng ones
             if (output[0].constructor == Object) {
               output = output;
-            } else { // [[1,2],[3,4]] or [1,2]
-              output = getLatLng(output);
+            } else if (output[0] instanceof Array) {
+              if (output[0][0].constructor == Object) {
+                output = output;
+              } else {
+                output = getLatLng(output);
+              }
+            } else {
+                output = getLatLng(output);
             }
           }
           // JSON is an object (not array or null)
@@ -114,9 +134,9 @@
               output = input;
             }
           // 7. evaluate dynamically bound values
-          } else if (input.match(/^{/) && options.scope) {
+        } else if (input.match(new RegExp('^' + escapeRegExp(exprStartSymbol))) && options.scope) {
             try {
-              var expr = input.replace(/{{/,'').replace(/}}/g,'');
+              var expr = input.replace(new RegExp(escapeRegExp(exprStartSymbol)),'').replace(new RegExp(escapeRegExp(exprEndSymbol), 'g'),'');
               output = options.scope.$eval(expr);
             } catch (err) {
               output = input;
@@ -129,7 +149,7 @@
 
       // convert output more for center and position
       if (
-        (options.key == 'center' || options.key == 'center') &&
+        (options.key == 'center' || options.key == 'position') &&
         output instanceof Array
       ) {
         output = new google.maps.LatLng(output[0], output[1]);
@@ -171,11 +191,12 @@
 
     var getAttrsToObserve = function(attrs) {
       var attrsToObserve = [];
+      var exprRegExp = new RegExp(escapeRegExp(exprStartSymbol) + '.*' + escapeRegExp(exprEndSymbol), 'g');
 
       if (!attrs.noWatcher) {
         for (var attrName in attrs) { //jshint ignore:line
           var attrValue = attrs[attrName];
-          if (attrValue && attrValue.match(/\{\{.*\}\}/)) { // if attr value is {{..}}
+          if (attrValue && attrValue.match(exprRegExp)) { // if attr value is {{..}}
             attrsToObserve.push(camelCaseFilter(attrName));
           }
         }
@@ -247,7 +268,7 @@
     };
 
     /**
-     * converts attributes hash to scope-specific event function 
+     * converts attributes hash to scope-specific event function
      * @memberof Attr2MapOptions
      * @param {scope} scope angularjs scope
      * @param {Hash} attrs tag attributes
@@ -371,8 +392,8 @@
 
   };
   Attr2MapOptions.$inject= [
-    '$parse', '$timeout', '$log', 'NavigatorGeolocation', 'GeoCoder',
-    'camelCaseFilter', 'jsonizeFilter'
+    '$parse', '$timeout', '$log', '$interpolate', 'NavigatorGeolocation', 'GeoCoder',
+    'camelCaseFilter', 'jsonizeFilter', 'escapeRegexpFilter'
   ];
 
   angular.module('ngMap').service('Attr2MapOptions', Attr2MapOptions);

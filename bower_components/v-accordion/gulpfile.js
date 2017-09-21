@@ -37,8 +37,9 @@ gulp.task('scripts', function() {
 });
 
 gulp.task('styles', function() {
-  return gulp.src('src/vAccordion/styles/v-accordion.scss')
+  return gulp.src('src/vAccordion/styles/vAccordion.scss')
     .pipe(sass({style: 'expanded'}))
+    .pipe(rename({basename: 'v-accordion'} ))
     .pipe(autoprefixer('last 2 version'))
     .pipe(header(banner, { pkg : pkg } ))
     .pipe(gulp.dest('dist/'))
@@ -65,7 +66,7 @@ gulp.task('lint-src', function() {
 
 gulp.task('lint-tests', function() {
   return gulp.src([
-      'test/**/*Spec.js'
+      'test/**/*.spec.js'
     ])
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('jshint-stylish'));
@@ -74,8 +75,8 @@ gulp.task('lint-tests', function() {
 gulp.task('default', ['lint-src', 'test', 'scripts', 'styles']);
 
 gulp.task('watch', function() {
-  gulp.watch('src/vAccordion/**/*.js', ['lint-src', 'scripts']);
+  gulp.watch('src/vAccordion/**/*.js', ['lint-src', 'scripts', 'test']);
   gulp.watch('test/**/*.spec.js', ['lint-tests', 'test']);
-  
+
   gulp.watch('src/vAccordion/styles/**/*.scss', ['styles']);
 });

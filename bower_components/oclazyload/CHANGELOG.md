@@ -1,3 +1,257 @@
+<a name="1.0.10"></a>
+# 1.1.0 (2017-02-03)
+
+
+## Bug Fixes
+
+- resolve the loader with created elements
+ ([3351e44d](https://github.com/ocombe/ocLazyLoad/commit/3351e44d2d76b7599eadfe59dec5a5674b1aff69), [#292](https://github.com/ocombe/ocLazyLoad/pull/292))
+- ensure CSS loader uses loading patch for PhantomJS 1.9 ([54d68e92](https://github.com/ocombe/ocLazyLoad/commit/54d68e92f83b1c9f5eba805a764c147566843544), [#280](https://github.com/ocombe/ocLazyLoad/pull/280))
+
+
+## Features
+
+- angular 1.6 compatibility
+ ([17d372fc](https://github.com/ocombe/ocLazyLoad/commit/17d372fce194a840a0d23f7a8b417601f769f52a),
+ [#377](https://github.com/ocombe/ocLazyLoad/issues/377))
+- allow hot reloading via systemjs-hot-reloader ([94088482](https://github.com/ocombe/ocLazyLoad/commit/94088482aad2bba0f49c3d873886e993bcdfa13c), [#291](https://github.com/ocombe/ocLazyLoad/pull/291))
+
+
+<a name="1.0.9"></a>
+# 1.0.9 (2015-11-24)
+
+
+## Bug Fixes
+
+- success callback for requirejs wrapper
+ ([fd9df8d1](https://github.com/ocombe/ocLazyLoad/commit/fd9df8d1507bb4f0c690ef3781b04a15f3b8eb6b),
+ [#260](https://github.com/ocombe/ocLazyLoad/issues/260))
+ 
+ 
+## Features
+
+- adding `_unregister` internal function
+ ([5aba0dc7](https://github.com/ocombe/ocLazyLoad/commit/5aba0dc77b1fa4f1a1a27419cbc8a54d614a728c),
+ [#265](https://github.com/ocombe/ocLazyLoad/issues/265))
+
+
+<a name="1.0.8"></a>
+# 1.0.8 (2015-11-02)
+
+
+## Bug Fixes
+
+- better fix for $compile problems in IE
+ ([ed4d425b](https://github.com/ocombe/ocLazyLoad/commit/ed4d425bfcf746901e2b956172c6a0b71e237bae),
+ [#261](https://github.com/ocombe/ocLazyLoad/issues/261))
+
+
+<a name="1.0.7"></a>
+# 1.0.7 (2015-11-02)
+
+
+## Bug Fixes
+
+- requirejs error callback
+ ([11130942](https://github.com/ocombe/ocLazyLoad/commit/11130942ab3dbed497a64ab7eac5175e9b3597c4))
+- infinite loop in inject
+ ([70859980](https://github.com/ocombe/ocLazyLoad/commit/70859980d0537780c46e5a096d8c3c9cff86de83))
+- IE "Invalid calling object" error (attach to DOM and then compile)
+ ([d99ab925](https://github.com/ocombe/ocLazyLoad/commit/d99ab92533ef4bdfa334926307af9f32097592a3))
+
+
+<a name="1.0.6"></a>
+# 1.0.6 (2015-10-01)
+
+
+## Bug Fixes
+- calling inject from loaders should pass the "real" module param
+ ([953584e8](https://github.com/ocombe/ocLazyLoad/commit/953584e8989de7ed1c2166ca193c899bad8a3478),
+ [#221](https://github.com/ocombe/ocLazyLoad/issues/221))
+- directive compile original contents after dependency is loaded.
+ ([a48e3ceb](https://github.com/ocombe/ocLazyLoad/commit/a48e3ceba1945e74478a0a7f964f9aa84e027799),
+ [#168](https://github.com/ocombe/ocLazyLoad/issues/168),
+ [#194](https://github.com/ocombe/ocLazyLoad/issues/194))
+
+
+<a name="1.0.5"></a>
+# 1.0.5 (2015-09-11)
+
+
+## Bug Fixes
+- loading a module with dependencies with multiple oc-lazy-load directives
+ ([098e391b](https://github.com/ocombe/ocLazyLoad/commit/098e391b0e084997c95a3125e66a41484a257cc1),
+ [#213](https://github.com/ocombe/ocLazyLoad/issues/213))
+- changing semver dependency for Angular
+ ([30626401](https://github.com/ocombe/ocLazyLoad/commit/30626401664d1be8fc748bb53c88f39cb58742c0),
+ [#195](https://github.com/ocombe/ocLazyLoad/issues/195))
+
+
+## Features
+
+- optimise signature calls and onInvoke function
+ ([c56e727e](https://github.com/ocombe/ocLazyLoad/commit/c56e727ef832c591920c58a32646c5a8f05f655c))
+
+
+<a name="1.0.4"></a>
+# 1.0.4 (2015-07-30)
+
+
+## Bug Fixes
+
+- don't let unmet dependencies slip through (thank you unit tests!)
+ ([23eb666d](https://github.com/ocombe/ocLazyLoad/commit/23eb666d6627416e40aaa97783b9e81ec7153fe9))
+- don't try to call angular.module on config names
+ ([52219f92](https://github.com/ocombe/ocLazyLoad/commit/52219f923319e0856da47a6bce064b6ffb361641),
+ [#217](https://github.com/ocombe/ocLazyLoad/issues/217), [#218](https://github.com/ocombe/ocLazyLoad/issues/218))
+
+
+<a name="1.0.3"></a>
+# 1.0.3 (2015-07-24)
+
+
+## Bug Fixes
+
+- check for config names when needed
+ ([023e4bb1](https://github.com/ocombe/ocLazyLoad/commit/023e4bb1e43a922ac4b9a4ef09ff475f1fec867a),
+ [#214](https://github.com/ocombe/ocLazyLoad/issues/214), [#198](https://github.com/ocombe/ocLazyLoad/issues/198))
+
+
+<a name="1.0.2"></a>
+# 1.0.2 (2015-07-10)
+
+
+## Bug Fixes
+
+- add extra condition to improve karma testing
+ ([f0c33aae](https://github.com/ocombe/ocLazyLoad/commit/f0c33aaea84511a276dd946dd48bfe2cb20d1e73))
+
+
+## Features
+
+- add interoperability with CommonJS
+ ([b0536ad4](https://github.com/ocombe/ocLazyLoad/commit/b0536ad4104467922c36bcf55a8a072343d102bc))
+
+
+<a name="1.0.1"></a>
+# 1.0.1 (2015-06-01)
+
+
+## Bug Fixes
+
+- don't remove filecache for files that were successfully loaded
+ ([e2ed37c0](https://github.com/ocombe/ocLazyLoad/commit/e2ed37c0eff32d34419af6851bfc355e7fb6f3ad))
+
+
+<a name="1.0.0"></a>
+# 1.0.0 (2015-05-29)
+
+
+## Bug Fixes
+
+- use parent element instead of head to insert files in native loaded
+ ([ad4276a3](https://github.com/ocombe/ocLazyLoad/commit/ad4276a39cddf8ebfd8f247690e98fc306c2d3bb),
+ [#164](https://github.com/ocombe/ocLazyLoad/issues/164))
+- don't compile text nodes in the directive
+ ([8900e493](https://github.com/ocombe/ocLazyLoad/commit/8900e493b8245084f4871d129250ffc54e565639),
+ [#168](https://github.com/ocombe/ocLazyLoad/issues/168))
+- files cache should be cleaned upon resolution of the promise
+ ([9a186c93](https://github.com/ocombe/ocLazyLoad/commit/9a186c93ccb72c63a45e40c6c1e86319d9d004fa),
+ [#189](https://github.com/ocombe/ocLazyLoad/issues/189))
+- reject promise when calling 'load' instead of 'inject'
+ ([31595472](https://github.com/ocombe/ocLazyLoad/commit/315954729aaa609d43aa7eb7750e8804cff9bf70),
+ [#147](https://github.com/ocombe/ocLazyLoad/issues/147))
+- make inject work as a standalone function when no params are given
+ ([499bd72d](https://github.com/ocombe/ocLazyLoad/commit/499bd72ddaf6addbf2c649a48776bd2b6ff35227),
+ [#171](https://github.com/ocombe/ocLazyLoad/issues/171))
+- guard against null-refs when parsing Safari user-agents
+ ([818aa5d0](https://github.com/ocombe/ocLazyLoad/commit/818aa5d0ddaa3909109d42b38f8921e9d4b18cda),
+ [#188](https://github.com/ocombe/ocLazyLoad/issues/188))
+- checking if we're not registering a component with a reserved name (such at `toString`)
+ ([7362ca49](https://github.com/ocombe/ocLazyLoad/commit/7362ca493384c5b14e203b9c013085cbcab980f8 ),
+ [#184](https://github.com/ocombe/ocLazyLoad/issues/184))
+
+
+<a name="1.0.0-beta.2"></a>
+# 1.0.0-beta.2 (2015-04-20)
+
+
+## Bug Fixes
+
+- Die infinite loops! You are not fun anymore (with param serie:true)
+ ([dab34c0a](https://github.com/ocombe/ocLazyLoad/commit/dab34c0a3513061665850f68d983c1f2729f5f5a),
+ [#166](https://github.com/ocombe/ocLazyLoad/issues/166))
+
+
+<a name="1.0.0-beta.1"></a>
+# 1.0.0-beta.1 (2015-04-16)
+
+
+## Bug Fixes
+
+- use document.querySelector for insertBefore when jQuery isn't available
+ ([6e8fa8c3](https://github.com/ocombe/ocLazyLoad/commit/6e8fa8c37f4305c50241288db7fddc5ecae0ab8f),
+ [#164](https://github.com/ocombe/ocLazyLoad/issues/164))
+
+
+## Documentation
+
+- adding a plunkr for issues
+ ([2f408d27](https://github.com/ocombe/ocLazyLoad/commit/2f408d2729eaf3df9cc8434375611a5b26181c0b))
+
+
+<a name="1.0.0-alpha.3"></a>
+# 1.0.0-alpha.3 (2015-04-09)
+
+
+## Bug Fixes
+
+- components can be registered as object maps now
+ ([08ed860e](https://github.com/ocombe/ocLazyLoad/commit/08ed860e7051f1f0dd132d760b958c5be1114177),
+ [#156](https://github.com/ocombe/ocLazyLoad/issues/156))
+- make a real copy of the params
+ ([6a5d3d4c](https://github.com/ocombe/ocLazyLoad/commit/6a5d3d4ca3fca1e90468aed10ef96f06669cd7f9),
+ [#160](https://github.com/ocombe/ocLazyLoad/issues/160))
+
+
+## Features
+
+- ES6fy all the things!
+ ([9cae48c8](https://github.com/ocombe/ocLazyLoad/commit/9cae48c828665e58132950d6db138d082f6bf2a2))
+
+
+<a name="1.0.0-alpha2"></a>
+# 1.0.0-alpha2 (2015-03-23)
+
+
+## Bug Fixes
+
+- hash shouldn't prevent file type detection
+ ([9e1d0894](https://github.com/ocombe/ocLazyLoad/commit/9e1d089413e09b14b7b46d5ff5de4612613be5e9),
+ [#153](https://github.com/ocombe/ocLazyLoad/issues/153))
+
+
+<a name="1.0.0-alpha1"></a>
+# 1.0.0-alpha1 (2015-03-19)
+
+
+## Features
+
+- ocLazyLoad is now modular and (partially) written in ES6! It should be easier to write new loaders (or even extensions), and you can cherry picks the parts that you like. For example, you can use the injector without the loaders. Also, all of the internal functions are available (preceded by an underscore, and undocumented), use them at your own risk (in fact you shouldn't need them unless you're writing an extension).
+
+
+## Bug Fixes
+
+- the directive should append the content and not add it after
+- only the modules added via angular.bootstrap should be considered "already loaded"
+ [#147](https://github.com/ocombe/ocLazyLoad/issues/147)
+ 
+## TODO before the release
+- try to remove most of the promises for perfs/tests
+- use moaaar ES6
+- clean up the code
+
+
 <a name="0.6.3"></a>
 # 0.6.3 (2015-03-09)
 

@@ -1,7 +1,7 @@
 angular-swipe
 =============
 
-Simple vertical/horizontal swipe gesture directives and a swipe service for angular js >= 1.4. Small extension of the existing angular $swipe service.
+Simple vertical/horizontal swipe gesture directives and a swipe service for angular js >= 1.6. Small extension of the existing angular $swipe service.
 
 ## Install
 
@@ -9,7 +9,7 @@ Simple vertical/horizontal swipe gesture directives and a swipe service for angu
 
 >
 ``` JavaScript
-"angular-swipe": "~0.1.0"
+"angular-swipe": "~0.2.1"
 ```
 
 + Include the required source file (this path or similar)
@@ -52,9 +52,9 @@ angular.module('app', ['swipe']);
 >
 ```html
 <div class="page" ng-controller="AppCtrl">
-    <div class="container" ng-swipe-up="swipe($event)">
-      <h1>Swipe me up!</h1>
-    </div>
+  <div class="container" ng-swipe-up="swipe($event)">
+    <h1>Swipe me up!</h1>
+  </div>
 </div>
 ```
 
@@ -71,3 +71,5 @@ app.controller('AppCtrl', function AppCtrl($scope) {
 ## Known issues and workarounds
 
 * ng-swipe-up and ng-swipe-down uses preventDefault when you start swiping. This prevents clicks from giving focus to input fields. Adding a `noPreventDefault` class to these elements will not preventDefault when the swipe start on them and thus allow clicks to work.
+
+* When embedding a Google map you might want to prevent a swipe event specifically inside the map. You can do that by adding the `noStartDrag` class to the Google map HTML element

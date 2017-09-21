@@ -6,8 +6,8 @@
   ],
   "description": "A beautiful replacement for JavaScript's alert.",
   "main": [
-    "lib/sweet-alert.js",
-    "lib/sweet-alert.css"
+    "dist/sweetalert.min.js",
+    "dist/sweetalert.css"
   ],
   "keywords": [
     "alert",
@@ -18,14 +18,14 @@
     "url": "git@github.com:t4t5/sweetalert.git"
   },
   "license": "MIT",
-  "version": "0.4.2",
-  "_release": "0.4.2",
+  "version": "1.0.1",
+  "_release": "1.0.1",
   "_resolution": {
     "type": "version",
-    "tag": "v0.4.2",
-    "commit": "ee05a73d6b80c580f1dbf05a8dbef91d8ade5a47"
+    "tag": "v1.0.1",
+    "commit": "dc438d74c9f8d315fc645f4fe29f0dba6f1e2e92"
   },
   "_source": "https://github.com/t4t5/sweetalert.git",
-  "_target": "~0.4.2",
+  "_target": "~1.0.1",
   "_originalSource": "sweetalert"
 }

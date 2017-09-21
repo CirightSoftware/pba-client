@@ -8,7 +8,7 @@ module.exports = {
 				'bower_components/moment/min/moment.min.js',
 				'bower_components/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js',
 				'bower_components/bootstrap-daterangepicker/daterangepicker.js',
-				'bower_components/sweetalert/lib/sweet-alert.min.js',
+				'bower_components/sweetalert/dist/sweetalert.min.js',
 				'bower_components/spin.js/spin.js',
 				'bower_components/ladda/dist/ladda.min.js',
 				'bower_components/slick-carousel/slick/slick.min.js',
@@ -70,7 +70,7 @@ module.exports = {
                 'bower_components/v-accordion/dist/v-accordion.min.css',
                 'bower_components/v-button/dist/v-button.min.css',
                 'bower_components/ladda/dist/ladda-themeless.min.css',
-                'bower_components/sweetalert/lib/sweet-alert.css',
+                'bower_components/sweetalert/dist/sweetalert.css',
                 'bower_components/animate.css/animate.css',
                 'assets/css/styles.css',
                 'assets/css/plugins.css'
