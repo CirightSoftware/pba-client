@@ -38,17 +38,10 @@ app.constant('JS_REQUIRES', {
 		
 		
         //*** Controllers
-        'dashboardCtrl': 'assets/js/controllers/dashboardCtrl.js',
         'chartsCtrl': 'assets/js/controllers/chartsCtrl.js',
         'userCtrl': 'assets/js/controllers/userCtrl.js',
         'registrationCtrl': 'assets/js/controllers/registrationCtrl.js',
         'loginCtrl': 'assets/js/controllers/loginCtrl.js',
-        'promotionCtrl': 'assets/js/controllers/promotionCtrl.js',
-        'createNewCtrl': 'assets/js/controllers/createNewCtrl.js',
-        'editCardCtrl': 'assets/js/controllers/editCardCtrl.js',
-        'productAnalyticsCtrl': 'assets/js/controllers/productAnalyticsCtrl.js',
-        'offerDetailsCtrl': 'assets/js/controllers/offerDetailsCtrl.js',
-        'cloneCardCtrl': 'assets/js/controllers/cloneCardCtrl.js',
         'customerCtrl': 'assets/js/controllers/customerCtrl.js'
     },
     //*** angularJS Modules
