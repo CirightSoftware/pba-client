@@ -15,4 +15,4 @@ script:
   - grunt build:production
 
 after_success:
-  "curl --ftp-create-dirs -T dist/pba-client-dist.zip -u $FTP_USER:$FTP_PASSWORD ftp://cirightone.com/pba/WARFileName"
+  "curl --ftp-create-dirs -T dist/pba-client-dist.zip -u $FTP_USER:$FTP_PASSWORD ftp://cirightone.com/pba/pba-client-dist.zip"
