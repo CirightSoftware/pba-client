@@ -14,12 +14,5 @@ before_script:
 script:
   - grunt build:production
 
-deploy:
-  on:
-    branch: production
-  provider: s3
-  access_key_id: $AWS_ACCESS_KEY_ID
-  secret_access_key: $AWS_SECRET_ACCESS_KEY
-  bucket: "test-deployment-pba"
-  skip_cleanup: true
-  local_dir: dist
+after_success:
+  "curl --ftp-create-dirs -T dist/pba-client-dist.zip -u $FTP_USER:$FTP_PASSWORD ftp://cirightone.com/pba/WARFileName"
