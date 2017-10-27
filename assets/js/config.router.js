@@ -34,89 +34,12 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         resolve: loadSequence('chartjs', 'chart.js'),
         abstract: true,
         data: {}
-    }).state('app.dashboard', {
-        url: "/dashboard",
-        templateUrl: "assets/views/dashboard.html",
-        resolve: loadSequence('d3', 'ui.knob', 'countTo', 'dashboardCtrl'),
-        title: 'Dashboard',
-        ncyBreadcrumb: {
-            label: 'Dashboard'
-        },
-        data: {
-            authorizedRoles: [USER_ROLES.admin]
-        }
-    }).state('app.productAnalytics', {
-        url: "/productAnalytics",
-        templateUrl: "assets/views/productAnalytics.html",
-        resolve: loadSequence('d3', 'countTo', 'productAnalyticsCtrl'),
-        title: 'Dashboard',
-        ncyBreadcrumb: {
-            label: 'Dashboard'
-        },
-        data: {
-            authorizedRoles: [USER_ROLES.admin]
-        }
-    }).state('app.promotions', {
-        url: "/promotions",
-        templateUrl: "assets/views/promotions.html",
-        resolve: loadSequence('ngTable', 'promotionCtrl'),
-        title: 'Promotions',
-        ncyBreadcrumb: {
-            label: 'Promotions'
-        },
-        data: {
-            authorizedRoles: [USER_ROLES.admin]
-        }
-    }).state('app.createNew', {
-        url: "/createNew",
-        templateUrl: "assets/views/createNew.html",
-        resolve: loadSequence('createNewCtrl', 'flow', 'ckeditor-plugin', 'ckeditor', 'touchspin-plugin'),
-        title: 'Create New',
-        ncyBreadcrumb: {
-            label: 'Create New'
-        },
-        data: {
-            authorizedRoles: [USER_ROLES.admin]
-        }
-    }).state('app.editCard', {
-        url: "/editCard/:promotionId",
-        templateUrl: "assets/views/editCard.html",
-        resolve: loadSequence('editCardCtrl', 'flow', 'ckeditor-plugin', 'ckeditor', 'touchspin-plugin'),
-        title: 'Create New',
-        ncyBreadcrumb: {
-            label: 'Create New'
-        },
-        data: {
-            authorizedRoles: [USER_ROLES.admin]
-        }
-    }).state('app.cloneCard', {
-        url: "/cloneCard/:promotionId",
-        templateUrl: "assets/views/cloneCard.html",
-        resolve: loadSequence('cloneCardCtrl', 'flow', 'ckeditor-plugin', 'ckeditor', 'touchspin-plugin'),
-        title: 'Clone Card',
-        ncyBreadcrumb: {
-            label: 'Clone Card'
-        },
-        data: {
-            authorizedRoles: [USER_ROLES.admin]
-        }
     }).state('app.pages', {
         url: '/pages',
         template: '<div ui-view class="fade-in-up"></div>',
         title: 'Pages',
         ncyBreadcrumb: {
             label: 'Pages'
-        },
-        data: {
-            authorizedRoles: [USER_ROLES.admin]
-        }
-    }).state('app.offerDetails', {
-        url: "/offerDetails/:productId/:productName",
-        templateUrl: "assets/views/offerDetails.html",
-        resolve: loadSequence('d3', 'ui.knob', 'offerDetailsCtrl'),
-        title: 'Offer Details',
-        ncyBreadcrumb: {
-            label: 'Offer Details'
         },
         data: {
             authorizedRoles: [USER_ROLES.admin]
@@ -136,10 +59,6 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: '/error',
         template: '<div ui-view class="fade-in-up"></div>',
         data: {}
-    }).state('error.404', {
-        url: '/404',
-        templateUrl: "assets/views/utility_404.html",
-        data: {}
     }).state('error.500', {
         url: '/500',
         templateUrl: "assets/views/utility_500.html",
@@ -158,10 +77,6 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
 	    templateUrl: "assets/views/login_login.html",
         resolve: loadSequence('loginCtrl'),        
         data: {}
-	}).state('login.forgot', {
-	    url: '/forgot',
-	    templateUrl: "assets/views/login_forgot.html",
-        data: {}
 	}).state('login.registration', {
 	    url: '/merchantregistration',
 	    templateUrl: "assets/views/login_registration.html",
@@ -174,26 +89,6 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         data: {}
     })
 
-	// Landing Page route
-	.state('landing', {
-	    url: '/landing-page',
-	    template: '<div ui-view class="fade-in-right-big smooth"></div>',
-	    abstract: true,
-	    resolve: loadSequence('jquery-appear-plugin', 'ngAppear', 'countTo'),
-        data: {}
-	}).state('landing.welcome', {
-	    url: '/welcome',
-	    templateUrl: "assets/views/landing_page.html",
-        data: {}
-	}).state('landing.recommendation', {
-        url: '/recommendation',
-        templateUrl: "assets/views/recommendation.html",
-        data: {}
-    }).state('landing.support', {
-        url: '/support',
-        templateUrl: "assets/views/support.html",
-        data: {}
-    });
     // Generates a resolve object previously configured in constant.JS_REQUIRES (config.constant.js)
     function loadSequence() {
         var _args = arguments;
