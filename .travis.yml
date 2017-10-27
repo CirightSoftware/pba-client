@@ -14,5 +14,8 @@ before_script:
 script:
   - grunt build:production
 
-after_success:
-  "curl --ftp-create-dirs -T dist/pba-client-dist.zip -u $FTP_USER:$FTP_PASSWORD ftp://cirightone.com/pba/pba-client-dist.zip"
+deploy:
+  provider: script
+  script: "curl --ftp-create-dirs -T dist/pba-client-dist.zip -u $FTP_USER:$FTP_PASSWORD ftp://cirightone.com/pba/pba-client-dist.zip"
+  on:
+    branch: master
