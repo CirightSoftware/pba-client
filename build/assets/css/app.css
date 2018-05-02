@@ -16696,6 +16696,74 @@ body.stop-scrolling {
   animation-name: slideOutUp;
 }
 
+@-moz-keyframes mk-loader {
+  0% {
+    -moz-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes mk-loader {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes mk-loader {
+  0% {
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+.mk-overlay-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #000000;
+  background: rgba(255,255,255, 0.3);
+  z-index: 99999;
+  text-align: center;
+}
+
+.mk-overlay {
+  top: 50%;
+  position: absolute;
+  width: 100%;
+  display: block;
+  color: #fff;
+  margin-top: -35px;
+}
+.mk-overlay .mk-spin {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  border-radius: 50%;
+  border: 3px solid #178595;
+  border-top-color: transparent;
+  -moz-animation: mk-loader 1500ms infinite linear;
+  -webkit-animation: mk-loader 1500ms infinite linear;
+  animation: mk-loader 1500ms infinite linear;
+}
+
+/*# sourceMappingURL=mk-blocker.css.map */
+
 /* ---------------------------------------------------------------------- 
 >>> TABLE OF CONTENT
 -------------------------------------------------------------------------

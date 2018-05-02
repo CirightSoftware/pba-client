@@ -344,7 +344,6 @@ app.controller('CouponCtrl', ["$scope", "$filter", "$http", "$rootScope", "$uibM
                     $scope.cardFrom.promotionalHeadline =  previewData.content;
                     $scope.cardFrom.disclaimer = previewData.contentDisclaimer;
                     if(previewData.isImage != '' &&  previewData.isImage == 1) {
-                        $scope.noImage = false;
                         $scope.promotionalImage = "https://www.myciright.com/Ciright/ajaxCall-photo.htm?flag=manuContentImage&compress=0&id="+$scope.cardFrom.contentId+"&dateTime="+$scope.currDate;
                     } else {
                         $scope.promotionalImage = "https://placeholdit.imgix.net/~text?txtsize=30&bg=efefef&txtclr=aaaaaa%26text%3Dno%2Bimage&txt=no+image";
