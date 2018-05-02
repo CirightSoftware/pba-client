@@ -44,6 +44,7 @@ module.exports = {
 				'bower_components/angular-ladda/dist/angular-ladda.min.js',
 				'bower_components/angular-awesome-slider/dist/angular-awesome-slider.min.js',
 				'bower_components/angular-slick-carousel/dist/angular-slick.min.js',
+				'bower_components/mk-blocker/src/mk-blocker.js',
 				'assets/js/app.js', 
 				'assets/js/main.js', 
 				'master/_config.constant.js', 
@@ -72,6 +73,7 @@ module.exports = {
                 'bower_components/ladda/dist/ladda-themeless.min.css',
                 'bower_components/sweetalert/dist/sweetalert.css',
                 'bower_components/animate.css/animate.css',
+                'bower_components/mk-blocker/src/mk-blocker.css',
                 'assets/css/styles.css',
                 'assets/css/plugins.css'
 			],

@@ -56,6 +56,7 @@
     <link rel="stylesheet" data-ng-href="assets/css/themes/{{ app.layout.theme }}.css" />
     <!-- Favicon -->
     <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="stylesheet" href="bower_components/mk-blocker/src/mk-blocker.css">
 </head>
 <body ng-controller="AppCtrl">
     <div ui-view id="app" class="lyt-3" ng-class="{'app-mobile' : app.isMobile, 'app-navbar-fixed' : app.layout.isNavbarFixed, 'app-sidebar-fixed' : app.layout.isSidebarFixed, 'app-sidebar-closed':app.layout.isSidebarClosed, 'app-footer-fixed':app.layout.isFooterFixed}"></div>
@@ -135,6 +136,7 @@
     <script src="../../bower_components/angular-ladda/dist/angular-ladda.min.js"></script>
     <!-- Angular Slick Carousel -->
     <script src="../../bower_components/angular-slick-carousel/dist/angular-slick.min.js"></script>
+    <script src="bower_components/mk-blocker/src/mk-blocker.js"></script>
     <!-- Packet Scripts -->
     <script src="assets/js/app.js"></script>
     <script src="assets/js/main.js"></script>

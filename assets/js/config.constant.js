@@ -42,7 +42,8 @@ app.constant('JS_REQUIRES', {
         'userCtrl': 'assets/js/controllers/userCtrl.js',
         'registrationCtrl': 'assets/js/controllers/registrationCtrl.js',
         'loginCtrl': 'assets/js/controllers/loginCtrl.js',
-        'customerCtrl': 'assets/js/controllers/customerCtrl.js'
+        'customerCtrl': 'assets/js/controllers/customerCtrl.js',
+        'couponCtrl' : 'assets/js/controllers/couponCtrl.js'
     },
     //*** angularJS Modules
     modules: [{
@@ -53,7 +54,7 @@ app.constant('JS_REQUIRES', {
         files: ['../../bower_components/angular-bootstrap-nav-tree/dist/abn_tree_directive.js', '../../bower_components/angular-bootstrap-nav-tree/dist/abn_tree.css']
     }, {
         name: 'ngTable',
-        files: ['../../bower_components/ng-table-bundle/ng-table.min..js', '../../bower_components/ng-table-bundle/ng-table.min..css']
+        files: ['../../bower_components/ng-table/dist/ng-table.min.js', '../../bower_components/ng-table/dist/ng-table.min.css']
     }, {
         name: 'ui.mask',
         files: ['../../bower_components/angular-ui-mask/dist/mask.min.js']
@@ -71,7 +72,7 @@ app.constant('JS_REQUIRES', {
         files: ['../../bower_components/ngmap/build/scripts/ng-map.min.js']
     }, {
         name: 'chart.js',
-        files: ['../..//bower_components/angular-chart.js/dist/Chart.min.js']
+        files: ['../../bower_components/angular-chart.js/dist/Chart.min.js']
     }, {
         name: 'flow',
         files: ['../../bower_components/ng-flow/dist/ng-flow-standalone.min.js']

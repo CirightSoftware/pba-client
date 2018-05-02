@@ -30,4 +30,5 @@ angular.module("pba_client", [
 	'duScroll',
 	'pascalprecht.translate',
 	'FBAngular',
+	'mkBlock',
 ]);

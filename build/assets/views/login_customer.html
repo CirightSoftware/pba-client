@@ -1,0 +1,166 @@
+<!-- start: REGISTRATION -->
+<toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+<div class="row">
+   <div class="main-login col-xs-10 col-xs-offset-3 col-sm-8 col-sm-offset-2">
+      <div class="logo text-center">
+      </div>
+      <!-- start: WIZARD DEMO -->
+      <div class="container-fluid container-fullw">
+         <div class="row">
+            <div class="col-md-12">
+               <div class="panel panel-white">
+                  <div class="panel-body">
+                     <!-- /// controller:  'customerCtrl' -  localtion: assets/js/controllers/customerCtrl.js /// -->
+                     <div ng-controller="customerCtrl">
+                        <div class="alert alert-block alert-danger fade in" ng-show="notificationSuccess == 0 && submited == 1">
+                           <h4 class="alert-heading margin-bottom-10"><i class="ti-close"></i> Error!</h4>
+                           <p class="margin-bottom-10">
+                              {{notificationMessage}}
+                           </p>
+                        </div>
+                        <div class="alert alert-block alert-success fade in" ng-show="notificationSuccess == 1">
+                           <h4 class="alert-heading margin-bottom-10"><i class="ti-check"></i> Success!</h4>
+                           <p class="margin-bottom-10">
+                              {{notificationMessage}}
+                           </p>
+                           <p>
+                             <a ui-sref="#" class="btn btn-success" ng-click="goToLogIn()"> Go to LogIn </a>
+                           </p>
+                        </div>
+                        <form name="Form" id="form1" novalidate method="POST" ng-show="submited == 0">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <fieldset>
+                                        <legend>
+                                            PBA Member
+                                        </legend>
+                                          <div class="row">
+                                             <div class="col-md-12">
+                                                <div class="form-group" ng-class="{'has-error':Form.companyName.$dirty && Form.companyName.$invalid, 'has-success':Form.companyName.$valid}">
+                                                      <label class="control-label"> Member Name<span class="symbol required"></span> </label>
+                                                      <input type="text" placeholder="Enter Member Name" class="form-control" name="companyName" ng-model="myModel.companyName" required />
+                                                      <span class="error text-small block" ng-if="Form.companyName.$dirty && Form.companyName.$invalid">Member Name is required</span>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="row">
+                                             <div class="col-md-12">
+                                                   <div class="form-group">
+                                                     <label class="control-label"> Website </label>
+                                                     <input type="text" placeholder="Enter Website" class="form-control" name="website" ng-model="myModel.website"  />
+                                                   </div>
+                                             </div>
+                                          </div>
+                                          <div class="row">
+                                             <div class="col-md-6">
+                                                   <div class="form-group" ng-class="{'has-error':Form.firstName.$dirty && Form.firstName.$invalid, 'has-success':Form.firstName.$valid}">
+                                                     <label class="control-label"> First Name <span class="symbol required"></span> </label>
+                                                     <input type="text" placeholder="Enter First Name" class="form-control" name="firstName" ng-model="myModel.firstName" required />
+                                                     <span class="error text-small block" ng-if="Form.firstName.$dirty && Form.firstName.$invalid">First Name is required</span>
+                                                   </div>
+                                             </div>
+                                             <div class="col-md-6">
+                                                <div class="form-group" ng-class="{'has-error':Form.lastName.$dirty && Form.lastName.$invalid, 'has-success':Form.lastName.$valid}">
+                                                     <label class="control-label"> Last Name <span class="symbol required"></span> </label>
+                                                     <input type="text" placeholder="Enter Last Name" class="form-control" name="lastName" ng-model="myModel.lastName" required />
+                                                     <span class="error text-small block" ng-if="Form.lastName.$dirty && Form.lastName.$invalid">Last Name is required</span>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="row">
+                                             <div class="col-md-6">
+                                                   <div class="form-group" ng-class="{'has-error':Form.address1.$dirty && Form.address1.$invalid, 'has-success':Form.address1.$valid}">
+                                                     <label class="control-label"> Address1 <span class="symbol required"></span> </label>
+                                                     <input type="text" placeholder="Enter Address1" class="form-control" name="address1" ng-model="myModel.address1" required />
+                                                     <span class="error text-small block" ng-if="Form.address1.$dirty && Form.address1.$error.required">Address1 is required.</span>
+                                                   </div>
+                                             </div>
+                                             <div class="col-md-6">
+                                                   <div class="form-group">
+                                                     <label class="control-label"> Address2 </label>
+                                                     <input type="text" placeholder="Enter Address2" class="form-control" name="address2" ng-model="myModel.address2"  />
+                                                   </div>
+                                             </div>
+                                          </div>
+                                          <div class="row">
+                                             <div class="col-md-6">
+                                                   <div class="form-group" ng-class="{'has-error':Form.city.$dirty && Form.city.$invalid, 'has-success':Form.city.$valid}">
+                                                     <label class="control-label"> City <span class="symbol required"></span> </label>
+                                                     <input type="text" placeholder="Enter City" class="form-control" name="city" ng-model="myModel.city" required />
+                                                     <span class="error text-small block" ng-if="Form.city.$dirty && Form.city.$error.required">City is required.</span>
+                                                   </div>
+                                             </div>
+                                             <div class="col-md-6">
+                                                   <div class="form-group" ng-class="{'has-error':Form.zip.$dirty && Form.zip.$invalid, 'has-success':Form.zip.$valid}">
+                                                     <label class="control-label"> Zip <span class="symbol required"></span></label>
+                                                     <input type="text" placeholder="Enter Zip" class="form-control" name="zip" ng-model="myModel.zip" required />
+                                                      <span class="error text-small block" ng-if="Form.zip.$dirty && Form.zip.$error.required">Zip is required.</span>
+                                                   </div>
+                                             </div>
+                                          </div>
+                                          <div class="row">
+                                             <div class="col-md-6">
+                                                <div class="form-group" ng-class="{'has-error':Form.state.$dirty && Form.state.$invalid, 'has-success':Form.state.$valid}">
+                                                   <label> State <span class="symbol required"></span> </label>
+                                                   <span class="clip-select">
+                                                      <select class="form-control" name="state" id="state" ng-model="myModel.state" 
+                                                           ng-pattern="/^[0-9]{1,7}$/">
+                                                         <option value="-1">Select State</option>
+                                                         <option ng-repeat="stateOption in stateData" value="{{stateOption.key}}">{{stateOption.value}}</option>
+                                                      </select>
+                                                      <span class="error text-small block" ng-if="Form.state.$dirty && Form.state.$invalid">State is Required.</span>
+                                                   </span>
+                                                </div>
+                                             </div>
+                                             <div class="col-md-6">
+                                                <div class="form-group" ng-class="{'has-error':Form.phoneNumber.$dirty && Form.phoneNumber.$invalid, 'has-success':Form.phoneNumber.$valid}">
+                                                   <label class="control-label"> Phone Number <span class="symbol required"></span> </label>
+                                                   <input type="text" class="form-control" name="phoneNumber" ng-model="myModel.phoneNumber" ui-mask="999 999 9999" required />
+                                                   <span class="error text-small block" ng-if="Form.phoneNumber.$dirty && Form.phoneNumber.$invalid">Phone Number is required.</span>
+                                                   <span class="error text-small block" ng-if="Form.phoneNumber.$error.phoneNumber">Please, enter a valid phone number.</span>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="row">
+                                             <div class="col-md-6">
+                                                   <div class="form-group" ng-class="{'has-error':Form.email.$dirty && Form.email.$invalid, 'has-success':Form.email.$valid}">
+                                                     <label class="control-label"> Email <span class="symbol required"></span> </label>
+                                                     <input type="email" placeholder="Enter Email" class="form-control" name="email" ng-model="myModel.email" required />
+                                                     <span class="error text-small block" ng-if="Form.email.$dirty && Form.email.$error.required">Email is required.</span>
+                                                   </div>
+                                             </div>
+                                             <div class="col-md-6">
+                                                   <div class="form-group" ng-class="{'has-error':Form.password.$dirty && Form.password.$invalid, 'has-success':Form.password.$valid}">
+                                                     <label class="control-label"> Password <span class="symbol required"></span> </label>
+                                                     <input type="password" placeholder="Enter Password" class="form-control" name="password" ng-model="myModel.password" required />
+                                                     <span class="error text-small block" ng-if="Form.password.$dirty && Form.password.$error.required">Password is required.</span>
+                                                   </div>
+                                             </div>
+                                          </div>
+                                          
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="pull-right">
+                                        <button type="submit" class="btn btn-primary" ng-click="submit(Form)">
+                                            Submit
+                                        </button>
+                                        <button type="reset" class="btn btn-primary btn-o" ng-click="reset()">
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- start: WIZARD DEMO -->
+      <!-- end: REGISTER BOX -->
+   </div>
+</div>

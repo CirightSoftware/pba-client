@@ -90,6 +90,7 @@
     "bootstrap": "~3.3.2",
     "flag-icon-css": "~2.8.0",
     "bootstrap-rtl": "~3.4.0",
-    "ng-table-bundle": "~4.0.0"
+    "ng-table-bundle": "~4.0.0",
+    "ng-table": "~0.8.3"
   }
 }

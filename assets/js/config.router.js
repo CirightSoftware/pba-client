@@ -31,29 +31,17 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     $stateProvider.state('app', {
         url: "/app",
         templateUrl: "assets/views/app.html",
-        resolve: loadSequence('chartjs', 'chart.js'),
         abstract: true,
         data: {}
-    }).state('app.pages', {
-        url: '/pages',
-        template: '<div ui-view class="fade-in-up"></div>',
-        title: 'Pages',
+    }).state('app.coupon', {
+        url: "/coupon",
+        templateUrl: "assets/views/coupon.html",
+        resolve: loadSequence('ngTable','ckeditor-plugin', 'ckeditor','flow','couponCtrl'),
+        title: 'Coupon',
         ncyBreadcrumb: {
-            label: 'Pages'
-        },
-        data: {
-            authorizedRoles: [USER_ROLES.admin]
-        }
-    }).state('app.user', {
-        url: '/user',
-        templateUrl: "assets/views/pages_user_profile.html",
-        title: 'User Profile',
-        ncyBreadcrumb: {
-            label: 'User Profile'
-        },
-        resolve: loadSequence('userCtrl' ,'flow', 'ui.mask'),
-        data: {
-            authorizedRoles: [USER_ROLES.admin]
+            label: 'Coupon'
+        }, data: {
+          authorizedRoles: [USER_ROLES.admin]
         }
     }).state('error', {
         url: '/error',

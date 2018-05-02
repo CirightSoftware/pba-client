@@ -101,24 +101,32 @@ app.filter('unsafe', function($sce) {
        return $sce.trustAsHtml(val);
     };
 });
-app.factory('AuthService', function ($rootScope, $window, $http, AUTH_EVENTS, Session) {
+app.factory('AuthService', function ($rootScope, $window, $http, AUTH_EVENTS, Session,SweetAlert,mkBlocker) {
  var authService = {};
 
  authService.login = function (credentials, success, error) {
-    return $http
-        .post($rootScope.app.api + '/login', credentials)
-        .success(function (loginData) {
-         if (loginData != null){
-            $window.sessionStorage["userInfo"] = JSON.stringify(credentials);
-            var logInDetails = JSON.stringify(loginData);
-             Session.create(loginData);
-             $rootScope.currentUser = loginData;
-             $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-             success(loginData);
-         } else {
+    mkBlocker.blockUI();
+    return $http({
+            method: 'POST',
+            url: $rootScope.app.api + '/login',
+            data: credentials,
+        }).then(function successCallback(response) {
+            mkBlocker.unblockUI();
+            var loginData=response.data;
+            if (loginData != null && loginData != ''){
+                $window.sessionStorage["userInfo"] = JSON.stringify(credentials);
+                var logInDetails = JSON.stringify(loginData);
+                Session.create(loginData);
+                $rootScope.currentUser = loginData;
+                $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+                success(loginData);
+            } else {
+                $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+                SweetAlert.swal("Authentication Failed!");
+            }
+        }, function errorCallback(response) {
             $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-            error();
-         }
+            SweetAlert.swal("Authentication Failed!");
         });
  };
 
