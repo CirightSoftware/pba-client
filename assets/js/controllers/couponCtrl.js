@@ -106,6 +106,7 @@ app.controller('CouponCtrl', ["$scope", "$filter", "$http", "$rootScope", "$uibM
             $scope.Form.$setPristine();
             $scope.Form.$setUntouched();
             $scope.Form.$submitted = false;
+            $scope.noImage = true;
         }
     }; 
 
