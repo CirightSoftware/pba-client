@@ -38,6 +38,7 @@ app.constant('JS_REQUIRES', {
 		
 		
         //*** Controllers
+        'dashboardCtrl': 'assets/js/controllers/dashboardCtrl.js',
         'chartsCtrl': 'assets/js/controllers/chartsCtrl.js',
         'userCtrl': 'assets/js/controllers/userCtrl.js',
         'registrationCtrl': 'assets/js/controllers/registrationCtrl.js',

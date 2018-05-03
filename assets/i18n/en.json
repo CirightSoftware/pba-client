@@ -17,6 +17,9 @@
             "NAVIGATION": "Main Navigation"
         },
         "nav": {
+            "dashboard": {
+                "MAIN": "Dashboard"
+            },
             "coupons": {
                 "MAIN": "Coupons"
             },

@@ -44,8 +44,8 @@ body {
   color: #414141 !important;
 }
 .navbar .navbar-header .sidebar-mobile-toggler {
-  background-color: #D5A00F !important;
-  border-color: #D5A00F !important;
+  background-color: #46b8da !important;
+  border-color: #46b8da !important;
   color: #ffffff !important;
 }
 .navbar .navbar-header .sidebar-mobile-toggler > i {
@@ -128,8 +128,8 @@ body {
   }
 }
 .navbar .navbar-collapse .navbar-left > li.sidebar-toggler-wrapper .btn {
-  background-color: #D5A00F;
-  border-color: #D5A00F;
+  background-color: #46b8da;
+  border-color: #46b8da;
   color: #ffffff !important;
 }
 .navbar .navbar-collapse .navbar-left > li.sidebar-toggler-wrapper .btn > i {
@@ -179,7 +179,7 @@ body {
   color: #414141 !important;
 }
 .navbar .navbar-collapse .navbar-right .angular-notifications-icon {
-  background: #D5A00F;
+  background: #46b8da;
 }
 @media (max-width: 991px) {
   .navbar .navbar-collapse {
@@ -312,11 +312,11 @@ body {
   color: #5A585F !important;
 }
 #sidebar > div nav > ul > li.active > a {
-  background: #D5A00F !important;
+  background: #46b8da !important;
   color: #fff !important;
 }
 #sidebar > div nav .folders .letter-icon-wrapper {
-  background: #D5A00F !important;
+  background: #46b8da !important;
 }
 
 .no-touch ul.sub-menu li:hover {
@@ -352,7 +352,7 @@ ul.sub-menu li.active > a, ul.sub-menu li.active:hover > a {
 }
 @media (min-width: 992px) {
   .app-sidebar-closed .app-aside > .item-inner {
-    background-color: #D5A00F !important;
+    background-color: #46b8da !important;
   }
   .app-sidebar-closed .app-aside > .item-inner > .title {
     color: #ffffff !important;
@@ -361,10 +361,10 @@ ul.sub-menu li.active > a, ul.sub-menu li.active:hover > a {
     border-color: #f2f2f2;
   }
   .app-sidebar-closed .app-aside > .item-inner.active {
-    background-color: #D5A00F !important;
+    background-color: #46b8da !important;
   }
   .app-sidebar-closed .app-aside > .item-inner.active:before {
-    border-color: #D5A00F;
+    border-color: #46b8da;
   }
   .app-sidebar-closed .app-aside ul.sub-menu {
     background: white !important;
@@ -390,5 +390,5 @@ ul.sub-menu li.active > a, ul.sub-menu li.active:hover > a {
 }
 
 #loading-bar .bar {
-  background: #D5A00F !important;
+  background: #46b8da !important;
 }

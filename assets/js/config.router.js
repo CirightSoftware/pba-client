@@ -33,6 +33,17 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         templateUrl: "assets/views/app.html",
         abstract: true,
         data: {}
+    }).state('app.dashboard', {
+        url: "/dashboard",
+        templateUrl: "assets/views/dashboard.html",
+        resolve: loadSequence('ngTable','dashboardCtrl'),
+        title: 'Dashboard',
+        ncyBreadcrumb: {
+            label: 'Dashboard'
+        },
+        data: {
+            authorizedRoles: [USER_ROLES.admin]
+        }
     }).state('app.coupon', {
         url: "/coupon",
         templateUrl: "assets/views/coupon.html",
